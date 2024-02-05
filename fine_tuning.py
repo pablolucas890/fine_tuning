@@ -11,11 +11,7 @@ client = OpenAI(api_key=key, organization = org)
 response_training = client.files.create(file=open("data_training.jsonl", "rb"), purpose="fine-tune")
 #Salvando o id do arquivo de treinamento que foi carregado na openAI
 id_training = response_training.id
-#Passando o arquivo .jsonl criado para validação para a openAI processar e recebendo sua resposta
-response_validation = client.files.create(file=open("data_validation.jsonl", "rb"), purpose="fine-tune")
-#Salvando o id do arquivo de validação que foi carregado na openAI
-id_validation = response_validation.id
-print("\033[94m" + "Modelo criado:" + "\033[0m\n\n")
 #Criando o modelo: aqui,deve-se passar o id do objeto retornado ao passar o .jsonl de treinamento para a OpenAI
-fine_tuning = client.fine_tuning.jobs.create(training_file=id_training, validation_file=id_validation, model=model, suffix=suffix)
+fine_tuning = client.fine_tuning.jobs.create(training_file=id_training, model=model, suffix=suffix)
+print("\033[94m" + "Modelo criado:" + "\033[0m\n\n")
 print(fine_tuning)
