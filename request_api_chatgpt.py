@@ -10,7 +10,7 @@ def get_objectives(trecho, componente):
       f"Você é um engenheiro ambiental e precisa identificar os objetivos do componente '{componente}' de um plano municipal de saneamento básico. "
       "Se a informação não estiver clara no trecho fornecido, indique que não é possível determinar os objetivos. "
       "Considere que o trecho pode vir de um PDF com tabelas, o que pode afetar a formatação. "
-      "Os objetivos devem ser apresentados de forma clara e concisa, sem introduções ou comentários adicionais."
+      "Os objetivos devem ser apresentados de forma clara e concisa, sem introduções ou comentários adicionais, isto é, apenas liste os objetivos separados por uma quebra de linha"
   )
 
   user = (
@@ -20,20 +20,36 @@ def get_objectives(trecho, componente):
 
   return system, user
 
-def get_objective_deadline(trecho, objetivo):
-    system = (
-        "Você é um engenheiro ambiental com a tarefa de analisar um plano municipal de saneamento básico. "
-        "Sua missão é identificar o prazo previsto para a realização de um objetivo específico. "
-        "Considere que o trecho fornecido pode conter informações em formatos variados, incluindo tabelas, devido à origem em um PDF. "
-        "Se o prazo não estiver claro ou não for mencionado, indique isso na sua resposta."
+def get_deadline(trecho, objetivo, componente):
+  system = (
+      "Você é um engenheiro ambiental com a tarefa de analisar um plano municipal de saneamento básico. "
+      "Sua missão é identificar o prazo previsto para a realização de um objetivo específico. "
+      "Considere que o trecho fornecido pode conter informações em formatos variados, incluindo tabelas, devido à origem em um PDF. "
+      "Se o prazo não estiver claro ou não for mencionado, indique isso na sua resposta."
+  )
+
+  user = (
+      f"Encontre o prazo para o objetivo específico '{objetivo}' do componente de '{componente}' no seguinte trecho do plano municipal de saneamento básico: '{trecho}'. "
+      "Liste apenas o prazo relacionado a esse objetivo específico, sem incluir informações adicionais."
+  )
+
+  return system, user
+
+def get_actions(trecho, objetivo, componente):
+  system = (
+      "Você é um engenheiro ambiental com a tarefa de analisar um plano municipal de saneamento básico. "
+      "Sua missão é identificar as ações previstas para alcançar um objetivo específico. "
+      "Considere que o trecho fornecido pode conter informações em formatos variados, incluindo tabelas, devido à origem em um PDF. "
+      "Se as ações não estiverem claras ou não forem mencionadas, indique isso na sua resposta."
+      "As ações devem ser apresentados de forma clara e concisa, sem introduções ou comentários adicionais, isto é, apenas liste-as separados por uma quebra de linha"
+  )
+
+  user = (
+      f"Encontre as ações previstas para alcançar o objetivo específico '{objetivo}' do componente de '{componente}' no seguinte trecho do plano municipal de saneamento básico: '{trecho}'. "
+      "Liste apenas as ações relacionadas a esse objetivo específico, sem incluir informações adicionais."
     )
 
-    user = (
-        f"Encontre o prazo para o objetivo específico '{objetivo}' no seguinte trecho do plano municipal de saneamento básico: '{trecho}'. "
-        "Liste apenas o prazo relacionado a esse objetivo específico, sem incluir informações adicionais."
-    )
-
-    return system, user
+  return system, user
 
 if __name__ == '__main__':
   
@@ -47,7 +63,8 @@ if __name__ == '__main__':
     objetivo = file.read().replace('\n', '')
     
   system, user = get_objectives(trecho, componente)
-  # system, user = get_objective_deadline(trecho, objetivo)
+  # system, user = get_deadline(trecho, objetivo, componente)
+  # system, user = get_actions(trecho, objetivo, componente)
   
   response = client.chat.completions.create(
     model=fine_tuned_model,
