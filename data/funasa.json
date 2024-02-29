@@ -1,69 +1,90 @@
 {
   "abastecimento-de-agua": [
     {
-      "objective": "Universalização do acesso da população ao sistema de abastecimento de água público, de forma adequada à saúde pública e à proteção do meio ambiente.",
-      "deadline": "20 anos",
-      "actions": [
-        "Manter o atendimento de 100% da população urbana do município com água tratada.",
-        "Manter o atendimento à Portaria Nº 2914/2011 do Ministério da Saúde.",
-        "Manter o fornecimento de água de maneira contínua à população, restringindo os casos de intermitência no abastecimento apenas às situações de necessária manutenção corretiva ou preventiva do sistema.",
-        "Implantar, em conjunto com a sociedade civil, Programa de Educação Socioambiental visando incentivar o uso racional da água.",
-        "Implantar e manter de forma permanente e integrada com os Comitês de Bacia Hidrográfica, órgãos governamentais municipais e estaduais e sociedade civil, Programa de Conservação dos Mananciais de Abastecimento atuais e futuros."
-      ]
+      "objective": "- Manutenção do índice de atendimento de cobertura de água: 100% até 2034",
+      "deadline": "Longo Prazo até 2034"
+    },
+    {
+      "objective": "- Redução das perdas de água: índice de perdas de 30% até 2034",
+      "deadline": "Longo Prazo até 2034"
+    },
+    {
+      "objective": "- Ampliação do índice de cobertura de coleta de esgotos: 100% até 2015",
+      "deadline": "Curto Prazo até 2015"
+    },
+    {
+      "objective": "- Ampliação do índice de tratamento de esgotos: índice de tratamento de 100% até 2018",
+      "deadline": "Curto Prazo até 2018"
+    },
+    {
+      "objective": "- Aumentar a capacidade nominal de tratamento de esgotos das populações urbanas atendidas pelo sistema público: ",
+      "deadline": "Curto Prazo até 2018"
+    },
+    {
+      "objective": "  - Bacia Córrego do Barreiro - 100% até 2018",
+      "deadline": "Curto Prazo até 2018"
+    },
+    {
+      "objective": "  - Bacia Córrego das Águas Quentes - 100% até 2018",
+      "deadline": "Curto Prazo até 2018"
+    },
+    {
+      "objective": "  - Bacia Córrego do Monte Sião - 100% até 2018",
+      "deadline": "Curto Prazo até 2018"
     }
   ],
   "esgotamento-sanitario": [
     {
-      "objective": "Universalização do acesso da população ao sistema de Esgotamento Sanitário, de forma adequada à saúde pública e à proteção do meio ambiente, mediante consulta prévia à população a ser beneficiada.",
-      "deadline": "20 anos",
-      "actions": [
-        "Universalização Acesso da População Urbana: Período 2016 - 2046",
-        "Executar as obras previstas na programação de investimentos para atendimento da meta para o ano de 2023.",
-        "Implantar concomitante com a execução das obras e, posteriormente, manter como programa permanente o Programa se Ligue na Rede, com o objetivo de orientar a população quanto à necessidade do uso correto da rede coletora de esgotos.",
-        "Elaborar os projetos executivo e complementares do Sistema de Esgotamento Sanitário, com vistas à implantação de coletores, interceptares e unidades localizadas (estação de tratamento ), bem como aferir no campo as áreas que necessitem serem desapropriadas para a implantação de passagem de redes e demais unidades, bem como proceder a atualização do orçamento de investimentos para a implantação das obras.",
-        "Atingir o Índice de Atendimento com Rede Coletora de Esgotos - IARCE de 33,00% da população urbana da sede do Município, até o ano de 2023.",
-        "Manter programa permanente de orientação técnica acerca dos métodos construtivos, dimensionamento, operação e manutenção do sistema, em parceria com a Prefeitura Municipal e Sociedade Civil."
-      ]
+      "objective": "Não é possível determinar os objetivos relacionados ao componente 'esgotamento sanitário' no trecho fornecido.",
+      "deadline": "Não é possível determinar o prazo"
     }
   ],
   "manejo-das-aguas-pluviais": [
     {
-      "objective": "Execução de melhorias no quadro de obras urbanas, com investimentos direcionados a drenagem e manejo de águas pluviais urbanas, promovendo também o bem estar social e estabelecendo novos mecanismos de gestão e de melhoria da qualidade ambiental, para a promoção da salubridade ambiental e da saúde coletiva, a proteção dos recursos hídricos e controle da poluição, o abastecimento de água à população e atividades econômicas.",
-      "deadline": "20 anos",
-      "actions": [
-        "No que cabe a Prefeitura Municipal de"
-      ]
+      "objective": "Não é possível determinar os objetivos relacionados ao componente 'manejo das águas pluviais' no trecho fornecido.",
+      "deadline": "Não é possível determinar o prazo"
     }
   ],
   "manejo-de-residuos-solidos": [
     {
-      "objective": "Diagnosticar a situação do sistema de acondicionamento, coleta, transporte e disposição final dos resíduos urbanos, através da caracterização gravimétrica dos resíduos sólidos, determinação da coleta produzida, entrevistas e observação de campo.",
-      "deadline": "1 ano",
-      "actions": [
-        "Realizar diagnóstico completo sobre a disposição de RSU, atentando para a contribuição de cada sistema de origem dos resíduos e a quantidade gerada, em toneladas, no período considerado.",
-        "Criar o cadastro das associações de catadores",
-        "Realizar a caracterização gravimétrica dos RSU's conforme NBR 10007",
-        "Promover programas e ações que garantam a não existência de áreas de disposição a céu aberto",
-        "Destinar os resíduos resultantes das podas às empresas especializadas ou aos viveiros florestais para fins de produção de mudas",
-        "Realizar a coleta dos RSU de forma sistematizada e regular dos resíduos de todas as unidades domiciliares do município atend"
-      ]
+      "objective": "Universalizar o atendimento dos serviços de coleta e limpeza urbana e a disposição adequada dos resíduos sólidos:",
+      "deadline": "Longo Prazo até 2034"
     },
     {
-      "objective": "Execução de melhorias no quadro de limpeza pública.",
-      "deadline": "1 ano",
-      "actions": [
-        "Realizar a coleta dos RSU de forma sistematizada e regular dos resíduos de todas as unidades domiciliares do município atend",
-        "Promover ações para o atendimento da meta de alcançar a cobertura plena do serviço de coleta de RS via contêiner",
-        "Promover uma ampla campanha de sensibilização das unidades domiciliares do município quanto a forma correta de acondicionamento dos RSU's",
-        "Promover ações de divulgação e educação sanitária quanto à separação, reciclagem e destinação final dos resíduos gerados nas residências",
-        "Construir ecopontos para a recepção e armazenamento de resíduos recicláveis secos, bem como estabelecer parcerias com a iniciativa privada para a instalação de PEVs (postos de entrega voluntária), especificamente os pontos de entrega de óleo de cozinha usado e lâmpadas fluorescentes",
-        "Disponibilizar, gratuitamente, recipientes para a coleta seletiva de RS através da entrega e instalação de contêineres",
-        "Prever recursos municipais para a aquisição e substituição gradativa de recipientes e equipamentos de coleta de RSU, contendo dispositivos com identificação do nome e logotipo da nossa cidade",
-        "Promover campanha para conscientização da população, por meio de cartilhas, folders e mídias sociais quanto ao acondicionamento, separação correta dos resíduos e horários da coleta",
-        "Efetuar a limpeza e capina nas praças, parques, jardins e logradouros do município",
-        "Incentivar a população ao uso racional dos sacos de lixo e aos dias de lixo molhado e seco",
-        "Impl"
-      ]
+      "objective": "- Ampliar o índice de coleta de resíduos sólidos domiciliares até 100%",
+      "deadline": "Longo Prazo até 2034"
+    },
+    {
+      "objective": "- Ampliar o índice de coleta dos resíduos da construção civil até 100%",
+      "deadline": "Longo Praz"
+    },
+    {
+      "objective": "- Manter o índice de coleta de resíduos de serviços de saúde",
+      "deadline": "Longo Prazo até 203"
+    },
+    {
+      "objective": "- Ampliar o índice de reciclagem dos resíduos domiciliares até 30%",
+      "deadline": "Longo"
+    },
+    {
+      "objective": "- Ampliar o índice de reaproveitamento dos resíduos da construção civil até 30%",
+      "deadline": "Longo Prazo"
+    },
+    {
+      "objective": "- Aumentar a nota da avaliação do IQR - Índice de Qualidade de Aterro de Resíduos até 100%",
+      "deadline": "Longo Prazo até"
+    },
+    {
+      "objective": "- Disposição adequada dos resíduos sólidos domiciliares",
+      "deadline": "Longo Prazo até 2034"
+    },
+    {
+      "objective": "- Disposição adequada dos resíduos da construção civil",
+      "deadline": "Longo Prazo até 2034"
+    },
+    {
+      "objective": "- Tratamento e disposição adequada dos resíduos de serviços de saúde",
+      "deadline": "Longo Prazo até 2034"
     }
   ]
 }
