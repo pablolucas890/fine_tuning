@@ -1,79 +1,25 @@
 {
   "abastecimento-de-agua": [
     {
-      "objective": "Universalização do acesso da população ao sistema de abastecimento de água público, de forma adequada à saúde pública e à proteção do meio ambiente.",
-      "deadline": "30",
-      "actions": [
-        "Manter o atendimento à Portaria Nº 2914/2011 do Ministério da Saúde.",
-        "Manter o fornecimento de água de maneira contínua à população, restringindo os casos de intermitência no abastecimento apenas às situações de necessária manutenção corretiva ou preventiva do sistema.",
-        "Implantar, em conjunto com a sociedade civil, Programa de Educação Socioambiental visando incentivar o uso racional da água.",
-        "Implantar e manter de forma permanente e integrada com os Comitês de Bacia Hidrográfica, órgãos governamentais municipais e estaduais e sociedade civil, Programa de Conservação dos Mananciais de Abastecimento atuais e futuros."
-      ]
-    },
-    {
-      "objective": "Manter o atendimento de 100% da população urbana do município com água tratada.",
-      "deadline": "Continuado",
-      "actions": [
-        "Manter o atendimento à Portaria Nº 2914/2011 do Ministério da Saúde.",
-        "Manter o fornecimento de água de maneira contínua à população, restringindo os casos de intermitência no abastecimento apenas às situações de necessária manutenção corretiva ou preventiva do sistema.",
-        "Implantar, em conjunto com a sociedade civil, Programa de Educação Socioambiental visando incentivar o uso racional da água.",
-        "Implantar e manter de forma permanente e integrada com os Comitês de Bacia Hidrográfica, órgãos governamentais municipais e estaduais e sociedade civil, Programa de Conservação dos Mananciais de Abastecimento atuais e futuros."
-      ]
-    },
-    {
-      "objective": "Manter o atendimento à Portaria Nº 2914/2011 do Ministério da Saúde.",
-      "deadline": "Continuado",
-      "actions": [
-        "Manter o atendimento à Portaria Nº 2914/2011 do Ministério da Saúde."
-      ]
-    },
-    {
-      "objective": "Manter o fornecimento de água de maneira contínua à população, restringindo os casos de intermitência no abastecimento apenas às situações de necessária manutenção corretiva ou preventiva do sistema.",
-      "deadline": "Continuado",
-      "actions": [
-        "Manter o fornecimento de água de maneira contínua à população, restringindo os casos de intermitência no abastecimento apenas às situações de necessária manutenção corretiva ou preventiva do sistema."
-      ]
-    },
-    {
-      "objective": "Implantar, em conjunto com a sociedade civil, Programa de Educação Socioambiental visando incentivar o uso racional da água.",
-      "deadline": "Período 2016 - 2046",
-      "actions": [
-        "Implantar, em conjunto com a sociedade civil, Programa de Educação Socioambiental visando incentivar o uso racional da água."
-      ]
-    },
-    {
-      "objective": "Implantar e manter de forma permanente e integrada com os Comitês de Bacia Hidrográfica, órgãos governamentais municipais e estaduais e sociedade civil, Programa de Conservação dos Mananciais de Abastecimento atuais e futuros.",
-      "deadline": "Período 2016 - 2046",
-      "actions": [
-        "Implantar e manter de forma permanente e integrada com os Comitês de Bacia Hidrográfica, órgãos governamentais municipais e estaduais e sociedade civil, Programa de Conservação dos Mananciais de Abastecimento atuais e futuros."
-      ]
+      "objective": "Universalização do acesso da população ao sistema de abastecimento de água público, de forma adequada à saúde pública e à proteção do meio ambiente."
     }
   ],
   "esgotamento-sanitario": [
     {
-      "objective": "Universalização do acesso da população ao sistema de Esgotamento Sanitário, de forma adequada à saúde pública e à proteção do meio ambiente, mediante consulta prévia à população a ser beneficiada.",
-      "deadline": "Período 2020 - 2021",
-      "actions": [
-        "Universalização do acesso da população ao sistema de Esgotamento Sanitário, de forma adequada à saúde pública e à proteção do meio ambiente, mediante consulta prévia à população a ser beneficiada."
-      ]
+      "objective": "Universalização do acesso da população ao sistema de Esgotamento Sanitário, de forma adequada à saúde pública e à proteção do meio ambiente, mediante consulta prévia à população a ser beneficiada."
     }
   ],
   "manejo-das-aguas-pluviais": [
     {
-      "objective": "Apenas para o componente 'abastecimento de água', foi possível determinar os objetivos.",
-      "deadline": "Não mostrado",
-      "actions": [
-        "Não foram mencionadas ações específicas para alcançar esse objetivo."
-      ]
+      "objective": "Execução de melhorias no quadro de obras urbanas, com investimentos direcionados a drenagem e manejo de águas pluviais urbanas, promovendo também o bem estar social e estabelecendo novos mecanismos de gestão e de melhoria da qualidade ambiental, para a promoção da salubridade ambiental e da saúde coletiva, a proteção dos recursos hídricos e controle da poluição, o abastecimento de água à população e atividades econômicas.",
     }
   ],
   "manejo-de-residuos-solidos": [
     {
-      "objective": "O plano de Gerenciamento Integrado dos Resíduos Sólidos Urbanos do município de Turvo, tem como objetivo diagnosticar a situação do sistema de acondicionamento, coleta, transporte e disposição final dos resíduos urbanos, através da caracterização gravimétrica dos resíduos sólidos, determinação da coleta produzida, entrevistas e observação de campo.",
-      "deadline": "1 ano",
-      "actions": [
-        "Não foram mencionadas ações específicas para alcançar esse objetivo."
-      ]
+      "objective": "Diagnosticar a situação do sistema de acondicionamento, coleta, transporte e disposição final dos resíduos urbanos, através da caracterização gravimétrica dos resíduos sólidos, determinação da coleta produzida, entrevistas e observação de campo."
+    },
+    {
+      "objective": "Execução de melhorias no quadro de limpeza pública."
     }
   ]
 }
