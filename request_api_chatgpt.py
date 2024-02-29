@@ -171,8 +171,13 @@ def get_option():
     return opt
 
 
-def get_plan():
-    with open("data/plan.txt", encoding="utf-8") as plan_file:
+def get_plan_objectives_and_deadlines():
+    with open("data/plan_objectives_and_deadlines.txt", encoding="utf-8") as plan_file:
+        return plan_file.read()
+
+
+def get_plan_actions():
+    with open("data/plan_actions.txt", encoding="utf-8") as plan_file:
         return plan_file.read()
 
 
@@ -185,7 +190,8 @@ def get_key(string):
 if __name__ == "__main__":
 
     option = get_option()
-    plan = get_plan()
+    plan_objectives_and_deadlines = get_plan_objectives_and_deadlines()
+    plan_actions = get_plan_actions()
 
     if option == "1":
         print(
@@ -202,7 +208,7 @@ if __name__ == "__main__":
             print("Gerando objetivos do componente de " + orange(component) + " ...")
             time.sleep(1)
             system, user, user_without_plan = get_system_user_from_objectives(
-                plan, component
+                plan_objectives_and_deadlines, component
             )
             response = get_assistant_message(system, user, user_without_plan)
             response_array = response.split("\n")
@@ -238,7 +244,7 @@ if __name__ == "__main__":
                 time.sleep(1)
                 for objective in objectives[get_key(component)]:
                     system, user, user_without_plan = get_system_user_from_deadline(
-                        plan, objective["objective"], component
+                        plan_objectives_and_deadlines, objective["objective"], component
                     )
                     response = get_assistant_message(system, user, user_without_plan)
                     objective["deadline"] = response
@@ -271,7 +277,7 @@ if __name__ == "__main__":
                 time.sleep(1)
                 for objective in objectives[get_key(component)]:
                     system, user, user_without_plan = get_system_user_from_actions(
-                        plan, objective["objective"], component
+                        plan_actions, objective["objective"], component
                     )
                     response = get_assistant_message(system, user, user_without_plan)
                     objective["actions"] = response.split("\n")
