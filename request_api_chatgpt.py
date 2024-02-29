@@ -79,8 +79,8 @@ def get_system_user_from_deadline(plan, objective, component):
 
     # pylint: disable-next=redefined-outer-name
     user_without_plan = (
-        f"Encontre o prazo para o objetivo específico '{objective}' do componente de '{component}' no seguinte trecho"
-        + " do plano municipal de saneamento básico. "
+        f"Encontre o prazo para o objetivo específico '{objective}' do componente de '{component}' no plano municipal"
+        + " de saneamento básico fornecido. "
         "Liste apenas o prazo relacionado a esse objetivo específico, sem incluir informações adicionais."
     )
 
@@ -110,7 +110,7 @@ def get_system_user_from_actions(plan, objective, component):
     # pylint: disable-next=redefined-outer-name
     user_without_plan = (
         f"Encontre as ações previstas para alcançar o objetivo específico '{objective}' do componente de '{component}'"
-        + " no seguinte trecho do plano municipal de saneamento básico. "
+        + " no trecho do plano municipal de saneamento básico fornecido. "
         "Liste apenas as ações relacionadas a esse objetivo específico, sem incluir informações adicionais."
     )
 
