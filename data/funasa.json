@@ -1,90 +1,82 @@
 {
   "abastecimento-de-agua": [
     {
-      "objective": "- Manutenção do índice de atendimento de cobertura de água: 100% até 2034",
+      "objective": "Ampliação do índice de cobertura de água,",
+      "deadline": "Longo prazo até 2034"
+    },
+    {
+      "objective": "Manutenção do índice de atendimento de Cobertura 100% Água,",
+      "deadline": "Longo prazo até 2034"
+    },
+    {
+      "objective": "Redução das perdas de água,",
       "deadline": "Longo Prazo até 2034"
     },
     {
-      "objective": "- Redução das perdas de água: índice de perdas de 30% até 2034",
-      "deadline": "Longo Prazo até 2034"
+      "objective": "Ampliação do índice de coleta de esgotos,",
+      "deadline": "Emergencial até 2015"
     },
     {
-      "objective": "- Ampliação do índice de cobertura de coleta de esgotos: 100% até 2015",
-      "deadline": "Curto Prazo até 2015"
-    },
-    {
-      "objective": "- Ampliação do índice de tratamento de esgotos: índice de tratamento de 100% até 2018",
-      "deadline": "Curto Prazo até 2018"
-    },
-    {
-      "objective": "- Aumentar a capacidade nominal de tratamento de esgotos das populações urbanas atendidas pelo sistema público: ",
-      "deadline": "Curto Prazo até 2018"
-    },
-    {
-      "objective": "  - Bacia Córrego do Barreiro - 100% até 2018",
-      "deadline": "Curto Prazo até 2018"
-    },
-    {
-      "objective": "  - Bacia Córrego das Águas Quentes - 100% até 2018",
-      "deadline": "Curto Prazo até 2018"
-    },
-    {
-      "objective": "  - Bacia Córrego do Monte Sião - 100% até 2018",
-      "deadline": "Curto Prazo até 2018"
+      "objective": "Ampliação do índice de tratamento de esgotos",
+      "deadline": "Curto prazo até 2018"
     }
   ],
   "esgotamento-sanitario": [
     {
-      "objective": "Não é possível determinar os objetivos relacionados ao componente 'esgotamento sanitário' no trecho fornecido.",
-      "deadline": "Não é possível determinar o prazo"
+      "objective": "Ampliação do índice de coleta de esgotos.",
+      "deadline": "Longo prazo até 2034"
+    },
+    {
+      "objective": "Ampliação do índice de tratamento de esgotos.",
+      "deadline": "Longo prazo até 2034"
     }
   ],
   "manejo-das-aguas-pluviais": [
     {
-      "objective": "Não é possível determinar os objetivos relacionados ao componente 'manejo das águas pluviais' no trecho fornecido.",
-      "deadline": "Não é possível determinar o prazo"
+      "objective": "Controle de inundações",
+      "deadline": "Médio prazo"
     }
   ],
   "manejo-de-residuos-solidos": [
     {
-      "objective": "Universalizar o atendimento dos serviços de coleta e limpeza urbana e a disposição adequada dos resíduos sólidos:",
-      "deadline": "Longo Prazo até 2034"
+      "objective": "Ampliar o índice de coleta de resíduos sólidos domiciliares.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Ampliar o índice de coleta de resíduos sólidos domiciliares até 100%",
-      "deadline": "Longo Prazo até 2034"
+      "objective": "Ampliar o índice de coleta dos resíduos da construção civil.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Ampliar o índice de coleta dos resíduos da construção civil até 100%",
-      "deadline": "Longo Praz"
+      "objective": "Manter o índice de coleta de resíduos de serviços de saúde.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Manter o índice de coleta de resíduos de serviços de saúde",
-      "deadline": "Longo Prazo até 203"
+      "objective": "Ampliar índice de reciclagem dos resíduos domiciliares.",
+      "deadline": "Longo prazo até 203"
     },
     {
-      "objective": "- Ampliar o índice de reciclagem dos resíduos domiciliares até 30%",
-      "deadline": "Longo"
+      "objective": "Ampliar índice de reaproveitamento dos resíduos da construção civil.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Ampliar o índice de reaproveitamento dos resíduos da construção civil até 30%",
-      "deadline": "Longo Prazo"
+      "objective": "Aumentar a nota da avaliação do IQR.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Aumentar a nota da avaliação do IQR - Índice de Qualidade de Aterro de Resíduos até 100%",
-      "deadline": "Longo Prazo até"
+      "objective": "Disposição adequada dos resíduos sólidos domiciliares.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Disposição adequada dos resíduos sólidos domiciliares",
-      "deadline": "Longo Prazo até 2034"
+      "objective": "Disposição adequada dos resíduos da construção civil.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Disposição adequada dos resíduos da construção civil",
-      "deadline": "Longo Prazo até 2034"
+      "objective": "Tratamento e disposição adequada dos resíduos de serviços de saúde.",
+      "deadline": "Longo prazo até 2034"
     },
     {
-      "objective": "- Tratamento e disposição adequada dos resíduos de serviços de saúde",
-      "deadline": "Longo Prazo até 2034"
+      "objective": "Universalização dos serviços de limpeza e varrição.",
+      "deadline": "2015"
     }
   ]
 }
