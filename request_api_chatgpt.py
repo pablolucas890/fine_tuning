@@ -2,14 +2,28 @@ from openai import OpenAI
 import json
 import time
 import os
+import tiktoken
 
 key = json.load(open('cfg.json'))['key']
 org = json.load(open('cfg.json'))['org']
-fine_tuned_model='gpt-3.5-turbo-1106'
+fine_tuned_model='ft:gpt-3.5-turbo-0613:personal:teste-pablo:8xFa0aLd'
 client = OpenAI(api_key=key, organization = org)
 components = ['abastecimento de água', 'esgotamento sanitário', 'manejo das águas pluviais', 'manejo de resíduos sólidos']
 objectives = {'abastecimento-de-agua': [],  'esgotamento-sanitario': [],  'manejo-das-aguas-pluviais': [],  'manejo-de-residuos-solidos': [] }
 messages = []
+encoding = tiktoken.get_encoding("cl100k_base")
+MAX_TOKENS_PER_EXAMPLE = 4096
+
+def num_tokens_from_messages(messages, tokens_per_message=3, tokens_per_name=1):
+    num_tokens = 0
+    for message in messages:
+        num_tokens += tokens_per_message
+        for key, value in message.items():
+            num_tokens += len(encoding.encode(value))
+            if key == "name":
+                num_tokens += tokens_per_name
+    num_tokens += 3
+    return num_tokens
 
 def get_system_user_from_objectives(plan, component):
   system = (
@@ -73,6 +87,14 @@ def get_system_user_from_actions(plan, objective, component):
   return system, user, user_without_plan
 
 def get_completion_not_stream(client, messages):
+  old_tokens = num_tokens_from_messages(messages)
+  if(old_tokens > MAX_TOKENS_PER_EXAMPLE):
+    for message in enumerate(messages):
+      _tokens = num_tokens_from_messages(messages)
+      if(_tokens > MAX_TOKENS_PER_EXAMPLE):
+        messages.pop(2)
+        messages.pop(2)
+  new_tokens = num_tokens_from_messages(messages)
   response = client.chat.completions.create(
     model=fine_tuned_model,
     messages=messages
@@ -171,4 +193,3 @@ if __name__ == '__main__':
           objective['actions'] = response.split('\n')
     write_objectives(objectives)
     print("\nAções salvas em " + orange("data/funasa.json"))
-  print(messages[len(messages)-2])
