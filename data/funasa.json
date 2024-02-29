@@ -1,25 +1,30 @@
 {
   "abastecimento-de-agua": [
     {
-      "objective": "Universalização do acesso da população ao sistema de abastecimento de água público, de forma adequada à saúde pública e à proteção do meio ambiente."
+      "objective": "Universalização do acesso da população ao sistema de abastecimento de água público, de forma adequada à saúde pública e à proteção do meio ambiente.",
+      "deadline": "30 anos"
     }
   ],
   "esgotamento-sanitario": [
     {
-      "objective": "Universalização do acesso da população ao sistema de Esgotamento Sanitário, de forma adequada à saúde pública e à proteção do meio ambiente, mediante consulta prévia à população a ser beneficiada."
+      "objective": "Universalização do acesso da população ao sistema de Esgotamento Sanitário, de forma adequada à saúde pública e à proteção do meio ambiente, mediante consulta prévia à população a ser beneficiada.",
+      "deadline": "2021-2022"
     }
   ],
   "manejo-das-aguas-pluviais": [
     {
       "objective": "Execução de melhorias no quadro de obras urbanas, com investimentos direcionados a drenagem e manejo de águas pluviais urbanas, promovendo também o bem estar social e estabelecendo novos mecanismos de gestão e de melhoria da qualidade ambiental, para a promoção da salubridade ambiental e da saúde coletiva, a proteção dos recursos hídricos e controle da poluição, o abastecimento de água à população e atividades econômicas.",
+      "deadline": "5 anos"
     }
   ],
   "manejo-de-residuos-solidos": [
     {
-      "objective": "Diagnosticar a situação do sistema de acondicionamento, coleta, transporte e disposição final dos resíduos urbanos, através da caracterização gravimétrica dos resíduos sólidos, determinação da coleta produzida, entrevistas e observação de campo."
+      "objective": "Diagnosticar a situação do sistema de acondicionamento, coleta, transporte e disposição final dos resíduos urbanos, através da caracterização gravimétrica dos resíduos sólidos, determinação da coleta produzida, entrevistas e observação de campo.",
+      "deadline": "1 ano"
     },
     {
-      "objective": "Execução de melhorias no quadro de limpeza pública."
+      "objective": "Execução de melhorias no quadro de limpeza pública.",
+      "deadline": "Sem prazo definido"
     }
   ]
 }
