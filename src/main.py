@@ -1,3 +1,4 @@
+# pylint: disable=redefined-outer-name
 import json
 import time
 import os
@@ -27,7 +28,7 @@ components = [
     "manejo das águas pluviais",
     "manejo de resíduos sólidos",
 ]
-objectives = {
+funasa = {
     "abastecimento-de-agua": [],
     "esgotamento-sanitario": [],
     "manejo-das-aguas-pluviais": [],
@@ -39,7 +40,6 @@ FINE_TUNED_MODEL = "ft:gpt-3.5-turbo-0613:personal:teste-pablo:8xFa0aLd"
 MAX_TOKENS_PER_EXAMPLE = 4096
 
 
-# pylint: disable-next=redefined-outer-name
 def get_completion_not_stream(client, messages):
     old_tokens = num_tokens_from_messages(messages)
     if old_tokens > MAX_TOKENS_PER_EXAMPLE:
@@ -56,7 +56,6 @@ def get_completion_not_stream(client, messages):
     return ""
 
 
-# pylint: disable-next=redefined-outer-name
 def get_assistant_message(system, user, user_without_plan):
     len_messages = len(messages)
     if len_messages == 0:
@@ -69,36 +68,42 @@ def get_assistant_message(system, user, user_without_plan):
     return assistent_response
 
 
-# pylint: disable-next=redefined-outer-name
-def write_objectives(objectives):
-    with open("data/funasa.json", encoding="utf-8", mode="w") as objective_file:
-        objectives = json.dumps(objectives, ensure_ascii=False, indent=2).encode("utf8")
-        objective_file.write(objectives.decode())
+def write_funasa(funasa):
+    with open("data/funasa.json", encoding="utf-8", mode="w") as f:
+        funasa = json.dumps(funasa, ensure_ascii=False, indent=2).encode("utf8")
+        f.write(funasa.decode())
 
 
-def get_option():
-    os.system("clear")
-    print("Digite a opção desejada: \n")
-    print(f"{orange('1')} - Identificar os objetivos do componente")
-    print(
-        f"{orange('2')} - Identificar o prazo para a realização de um objetivo específico"
-    )
-    print(
-        f"{orange('3')} - Identificar as ações previstas para alcançar um objetivo específico"
-    )
-    opt = input()
+def get_option(menu_type):
+    if menu_type == "main_menu":
+        os.system("clear")
+        print("Digite a opção desejada: \n")
+        print(f"{orange('1')} - Identificar os objetivos do componente")
+        print(f"{orange('2')} - Identificar o prazo de um objetivo específico")
+        print(f"{orange('3')} - Identificar as ações de um objetivo específico")
+        opt = input()
+    elif menu_type == "components_menu":
+        print("Digite a opção desejada: \n")
+        print(f"{orange('1')} - Todos os componentes")
+        print(f"{orange('2')} - Apenas o componente de abastecimento de água")
+        print(f"{orange('3')} - Apenas o componente de esgotamento sanitário")
+        print(f"{orange('4')} - Apenas o componente de manejo das águas pluviais")
+        print(f"{orange('5')} - Apenas o componente de manejo de resíduos sólidos")
+        opt = input()
     os.system("clear")
     return opt
 
 
-def get_plan_objectives_and_deadlines():
-    with open("data/plan_objectives_and_deadlines.txt", encoding="utf-8") as plan_file:
-        return plan_file.read()
+def get_plan(plan):
+    with open(f"data/plan_{plan}.txt", encoding="utf-8") as f:
+        return f.read()
 
 
-def get_plan_actions():
-    with open("data/plan_actions.txt", encoding="utf-8") as plan_file:
-        return plan_file.read()
+def get_funasa():
+    if not os.path.exists("data/funasa.json"):
+        return funasa
+    with open("data/funasa.json", encoding="utf-8") as file:
+        return json.load(file)
 
 
 def get_key(string):
@@ -107,74 +112,72 @@ def get_key(string):
     )
 
 
+def generate_objectives(index, plan):
+    component = components[index]
+    funasa[get_key(component)] = []
+    print("Gerando objetivos do componente de " + orange(component) + " ...")
+    time.sleep(1)
+    system, user, user_without_plan = get_system_user_from_objectives(plan, component)
+    response = get_assistant_message(system, user, user_without_plan)
+    response_array = response.split("\n")
+    for res in response_array:
+        if res != "":
+            funasa[get_key(component)].append({"objective": res})
+
+
+def generate_deadlines_and_actions(index, plan, key):
+    print(
+        f"Gerando {orange(key)} para os objetivos do componente de {orange(components[index])} ..."
+    )
+    time.sleep(1)
+    for objective in funasa[get_key(components[index])]:
+        if key == "actions":
+            system, user, user_without_plan = get_system_user_from_actions(
+                plan, objective["objective"], components[index]
+            )
+            objective[key] = get_assistant_message(
+                system, user, user_without_plan
+            ).split("\n")
+        else:
+            system, user, user_without_plan = get_system_user_from_deadline(
+                plan, objective["objective"], components[index]
+            )
+            objective[key] = get_assistant_message(system, user, user_without_plan)
+
+
 if __name__ == "__main__":
 
-    option = get_option()
-    plan_objectives_and_deadlines = get_plan_objectives_and_deadlines()
-    plan_actions = get_plan_actions()
+    funasa = get_funasa()
+
+    option = get_option("main_menu")
 
     if option == "1":
-        print(
-            f"\nOpção {orange('1')} selecionada, indentificando os {orange('objetivos')} do plano localizado em "
-            + f" {orange('data/plan.txt')}\n"
-        )
-        time.sleep(2)
-        for i, component in enumerate(components):
-            print("Gerando objetivos do componente de " + orange(component) + " ...")
-            time.sleep(1)
-            system, user, user_without_plan = get_system_user_from_objectives(
-                plan_objectives_and_deadlines, component
-            )
-            response = get_assistant_message(system, user, user_without_plan)
-            response_array = response.split("\n")
-            for res in response_array:
-                if res != "":
-                    objectives[get_key(component)].append({"objective": res})
-        write_objectives(objectives)
-        print("\nObjetivos salvos em " + orange("data/funasa.json"))
-
+        plan = get_plan("objectives_and_deadlines")
+        option = get_option("components_menu")
+        if option == "1":
+            for index in enumerate(components):
+                generate_objectives(index, plan)
+        else:
+            index = int(option) - 2
+            generate_objectives(index, plan)
     elif option == "2":
-        print(
-            f"Opção {orange('2')} selecionada, indentificando os {orange('prazos')} para a realização dos "
-            + f"{orange('objetivos')} localizados em {orange('data/funasa.json')} do plano localizado em "
-            + f"{orange('data/plan.txt')}\n"
-        )
-        time.sleep(2)
-        with open("data/funasa.json", encoding="utf-8") as file:
-            objectives = json.load(file)
-            for i, component in enumerate(components):
-                print(
-                    f"Gerando prazos para os objetivos do componente de {orange(component)} ..."
-                )
-                time.sleep(1)
-                for objective in objectives[get_key(component)]:
-                    system, user, user_without_plan = get_system_user_from_deadline(
-                        plan_objectives_and_deadlines, objective["objective"], component
-                    )
-                    response = get_assistant_message(system, user, user_without_plan)
-                    objective["deadline"] = response
-        write_objectives(objectives)
-        print("\nPrazos salvos em " + orange("data/funasa.json"))
-
+        plan = get_plan("objectives_and_deadlines")
+        option = get_option("components_menu")
+        if option == "1":
+            for index in enumerate(components):
+                generate_deadlines_and_actions(index, plan, "deadline")
+        else:
+            index = int(option) - 2
+            generate_deadlines_and_actions(index, plan, "deadline")
     elif option == "3":
-        print(
-            f"Opção {orange('3')} selecionada, indentificando as {orange('ações')} previstas para alcançar os "
-            + f"{orange('objetivos')} localizados em {orange('data/funasa.json')} do plano localizado em "
-            + f"{orange('data/plan.txt')}\n"
-        )
-        time.sleep(2)
-        with open("data/funasa.json", encoding="utf-8") as file:
-            objectives = json.load(file)
-            for i, component in enumerate(components):
-                print(
-                    f"Gerando ações para os objetivos do componente de {orange(component)} ..."
-                )
-                time.sleep(1)
-                for objective in objectives[get_key(component)]:
-                    system, user, user_without_plan = get_system_user_from_actions(
-                        plan_actions, objective["objective"], component
-                    )
-                    response = get_assistant_message(system, user, user_without_plan)
-                    objective["actions"] = response.split("\n")
-        write_objectives(objectives)
-        print("\nAções salvas em " + orange("data/funasa.json"))
+        plan = get_plan("actions")
+        option = get_option("components_menu")
+        if option == "1":
+            for index in enumerate(components):
+                generate_deadlines_and_actions(index, plan, "actions")
+        else:
+            index = int(option) - 2
+            generate_deadlines_and_actions(index, plan, "actions")
+
+    write_funasa(funasa)
+    print("\nDados salvos em " + orange("data/funasa.json"))
