@@ -161,14 +161,12 @@ def write_objectives(objectives):
 def get_option():
     os.system("clear")
     print("Digite a opção desejada: \n")
-    print(orange("1") + " - Identificar os objetivos do componente")
+    print(f"{orange('1')} - Identificar os objetivos do componente")
     print(
-        orange("2")
-        + " - Identificar o prazo para a realização de um objetivo específico"
+        f"{orange('2')} - Identificar o prazo para a realização de um objetivo específico"
     )
     print(
-        orange("3")
-        + " - Identificar as ações previstas para alcançar um objetivo específico"
+        f"{orange('3')} - Identificar as ações previstas para alcançar um objetivo específico"
     )
     opt = input()
     os.system("clear")
@@ -199,13 +197,8 @@ if __name__ == "__main__":
 
     if option == "1":
         print(
-            "\nOpção "
-            + orange("1")
-            + " selecionada, indentificando os "
-            + orange("objetivos")
-            + " do plano localizado em "
-            + orange("data/plan.txt")
-            + "\n"
+            f"\nOpção {orange('1')} selecionada, indentificando os {orange('objetivos')} do plano localizado em "
+            + f" {orange('data/plan.txt')}\n"
         )
         time.sleep(2)
         for i, component in enumerate(components):
@@ -224,26 +217,16 @@ if __name__ == "__main__":
 
     elif option == "2":
         print(
-            "Opção "
-            + orange("2")
-            + " selecionada, indentificando os "
-            + orange("prazos")
-            + " para a realização dos "
-            + orange("objetivos")
-            + " localizados em "
-            + orange("data/funasa.json")
-            + " do plano localizado em "
-            + orange("data/plan.txt")
-            + "\n"
+            f"Opção {orange('2')} selecionada, indentificando os {orange('prazos')} para a realização dos "
+            + f"{orange('objetivos')} localizados em {orange('data/funasa.json')} do plano localizado em "
+            + f"{orange('data/plan.txt')}\n"
         )
         time.sleep(2)
         with open("data/funasa.json", encoding="utf-8") as file:
             objectives = json.load(file)
             for i, component in enumerate(components):
                 print(
-                    "Gerando prazos para os objetivos do componente de "
-                    + orange(component)
-                    + " ..."
+                    f"Gerando prazos para os objetivos do componente de {orange(component)} ..."
                 )
                 time.sleep(1)
                 for objective in objectives[get_key(component)]:
@@ -257,26 +240,16 @@ if __name__ == "__main__":
 
     elif option == "3":
         print(
-            "Opção "
-            + orange("3")
-            + " selecionada, indentificando as "
-            + orange("ações")
-            + " previstas para alcançar os "
-            + orange("objetivos")
-            + " localizados em "
-            + orange("data/funasa.json")
-            + " do plano localizado em "
-            + orange("data/plan.txt")
-            + "\n"
+            f"Opção {orange('3')} selecionada, indentificando as {orange('ações')} previstas para alcançar os "
+            + f"{orange('objetivos')} localizados em {orange('data/funasa.json')} do plano localizado em "
+            + f"{orange('data/plan.txt')}\n"
         )
         time.sleep(2)
         with open("data/funasa.json", encoding="utf-8") as file:
             objectives = json.load(file)
             for i, component in enumerate(components):
                 print(
-                    "Gerando ações para os objetivos do componente de "
-                    + orange(component)
-                    + " ..."
+                    f"Gerando ações para os objetivos do componente de {orange(component)} ..."
                 )
                 time.sleep(1)
                 for objective in objectives[get_key(component)]:
