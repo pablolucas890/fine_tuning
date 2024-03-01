@@ -1,12 +1,13 @@
+import sys
 import tiktoken
+
+sys.path.append("/".join(__file__.split("/")[0:-2]))
+# pylint: disable-next=wrong-import-position
+from lib.aux import orange, purple, get_system_user_from_objectives
 
 encoding = tiktoken.get_encoding("cl100k_base")
 
 MAX_TOKENS_PER_EXAMPLE = 4096
-
-
-def orange(string):
-    return "\033[38;5;208m" + string + "\033[0m"
 
 
 # pylint: disable-next=redefined-outer-name
@@ -29,32 +30,16 @@ if __name__ == "__main__":
     with open("data/plan_objectives_and_deadlines.txt", encoding="utf-8") as f:
         plan_objectives_and_deadlines = f.read()
 
-    SYSTEM = (
-        "Você é um engenheiro ambiental e precisa identificar os objetivos do componente  de um plano"
-        + " municipal de saneamento básico. "
-        "Se a informação não estiver clara no trecho fornecido, indique que não é possível determinar os objetivos. "
-        "Considere que o trecho pode vir de um PDF com tabelas, o que pode afetar a formatação. "
-        "Os objetivos devem ser apresentados de forma clara e concisa, sem introduções, títulos, descrições,"
-        + " explicações ou comentários adicionais, isto é, apenas liste os objetivos separados por uma quebra de linha"
-    )
-    USER_1 = (
-        "Identifique e liste apenas os objetivos relacionados ao componente  encontrados no trecho do"
-        + " plano municipal de saneamento básico fornecido. "
-        f"Trecho do plano: '{plan_actions}'. Evite adicionar comentários ou explicações extras."
-    )
-    USER_2 = (
-        "Identifique e liste apenas os objetivos relacionados ao componente  encontrados no trecho do"
-        + " plano municipal de saneamento básico fornecido. "
-        f"Trecho do plano: '{plan_objectives_and_deadlines}'. Evite adicionar comentários ou explicações extras."
-    )
+    system, user_1, _ = get_system_user_from_objectives(plan_actions, "")
+    _, user_2, _ = get_system_user_from_objectives(plan_objectives_and_deadlines, "")
 
     messages_1 = []
-    messages_1.append({"role": "system", "content": SYSTEM})
-    messages_1.append({"role": "user", "content": USER_1})
+    messages_1.append({"role": "system", "content": system})
+    messages_1.append({"role": "user", "content": user_1})
 
     messages_2 = []
-    messages_2.append({"role": "system", "content": SYSTEM})
-    messages_2.append({"role": "user", "content": USER_2})
+    messages_2.append({"role": "system", "content": system})
+    messages_2.append({"role": "user", "content": user_2})
 
     tokens_1 = num_tokens_from_messages(messages_1)
     tokens_2 = num_tokens_from_messages(messages_2)
@@ -64,11 +49,11 @@ if __name__ == "__main__":
 
     if tokens_1 > MAX_TOKENS_PER_EXAMPLE:
         print(
-            f"Warning: the plan_actions has {orange(str(tokens_1))} tokens, which is over the"
-            + f" {orange(str(MAX_TOKENS_PER_EXAMPLE))} token limit"
+            f"\n{purple('Warning')}: the plan_actions has {purple(str(tokens_1))} tokens, which is over the"
+            + f" {purple(str(MAX_TOKENS_PER_EXAMPLE))} token limit"
         )
     if tokens_2 > MAX_TOKENS_PER_EXAMPLE:
         print(
-            f"Warning: the plan_objectives_and_deadlines has {orange(str(tokens_2))} tokens, which is over the"
-            + f" {orange(str(MAX_TOKENS_PER_EXAMPLE))} token limit"
+            f"\n{purple('Warning')}: the plan_objectives_and_deadlines has {purple(str(tokens_2))} tokens, which is "
+            + f" over the {orange(str(MAX_TOKENS_PER_EXAMPLE))} token limit"
         )
