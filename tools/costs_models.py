@@ -1,8 +1,12 @@
 from collections import defaultdict
 import json
+import sys
 import tiktoken
 import numpy as np
-from aux import purple, orange, num_tokens_from_messages
+
+sys.path.append("/".join(__file__.split("/")[0:-2]))
+# pylint: disable-next=wrong-import-position
+from lib.aux import purple, orange, num_tokens_from_messages
 
 
 encoding = tiktoken.get_encoding("cl100k_base")
@@ -143,7 +147,7 @@ def cost_estimate(data, convo_lens_array):
 
 
 if __name__ == "__main__":
-    dataset = data_loading("data_training.jsonl")
+    dataset = data_loading("data/data_training.jsonl")
     initial_statistics(dataset)
     search_erors(dataset)
     convo_lens = count_tokens_and_more_informations(dataset)

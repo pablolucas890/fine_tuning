@@ -1,6 +1,10 @@
 import json
+import sys
 from openai import OpenAI
-from aux import purple
+
+sys.path.append("/".join(__file__.split("/")[0:-2]))
+# pylint: disable-next=wrong-import-position
+from lib.aux import purple
 
 if __name__ == "__main__":
 

@@ -1,8 +1,12 @@
 import json
 import time
 import os
+import sys
 from openai import OpenAI
-from aux import orange, num_tokens_from_messages
+
+sys.path.append("/".join(__file__.split("/")[0:-2]))
+# pylint: disable-next=wrong-import-position
+from lib.aux import orange, num_tokens_from_messages
 
 with open("cfg.json", encoding="utf-8") as f:
     key = json.load(f)["key"]

@@ -1,6 +1,10 @@
 import json
+import sys
 from openai import OpenAI
-from aux import purple
+
+sys.path.append("/".join(__file__.split("/")[0:-2]))
+# pylint: disable-next=wrong-import-position
+from lib.aux import purple
 
 
 if __name__ == "__main__":
@@ -13,7 +17,7 @@ if __name__ == "__main__":
         suffix = json.load(f)["suffix"]
     with open("cfg.json", encoding="utf-8") as f:
         model = json.load(f)["model"]
-    with open("data_training.jsonl", "r", encoding="utf-8") as f:
+    with open("data/data_training.jsonl", "r", encoding="utf-8") as f:
         data = [json.loads(line) for line in f]
 
     client = OpenAI(api_key=key, organization=org)
