@@ -3,25 +3,15 @@ import tiktoken
 
 sys.path.append("/".join(__file__.split("/")[0:-2]))
 # pylint: disable-next=wrong-import-position
-from lib.aux import orange, purple, get_system_user_from_objectives
+from lib.aux import (
+    orange,
+    purple,
+    get_system_user_from_objectives,
+    num_tokens_from_messages,
+)
 
 encoding = tiktoken.get_encoding("cl100k_base")
-
 MAX_TOKENS_PER_EXAMPLE = 4096
-
-
-# pylint: disable-next=redefined-outer-name
-def num_tokens_from_messages(messages, tokens_per_message=3, tokens_per_name=1):
-    num_tokens = 0
-    for message in messages:
-        num_tokens += tokens_per_message
-        for index, value in message.items():
-            num_tokens += len(encoding.encode(value))
-            if index == "name":
-                num_tokens += tokens_per_name
-    num_tokens += 3
-    return num_tokens
-
 
 if __name__ == "__main__":
 
