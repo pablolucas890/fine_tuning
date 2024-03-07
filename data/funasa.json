@@ -2,81 +2,144 @@
   "abastecimento-de-agua": [
     {
       "objective": "Ampliação do índice de cobertura de água,",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "ampliação da capacidade de produção de água tratada;",
+        "expansão da rede de distribuição de água;",
+        "realização de campanhas de conscientização sobre a importância da água e o combate ao desperdício;",
+        "implantação de sistema de captação de água de chuva para uso não potável."
+      ]
     },
     {
       "objective": "Manutenção do índice de atendimento de Cobertura 100% Água,",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "elaboração do projeto executivo do sistema de distribuição, com as ampliações necessárias, com enfoque na implantação da setorização e equacionamento da macro e micromedição;",
+        "elaboração e disponibilização de um cadastro técnico do sistema de abastecimento de água, em meio digital, com atualização contínua;",
+        "implantação de um sistema informatizado para controle operacional."
+      ]
     },
     {
       "objective": "Redução das perdas de água,",
-      "deadline": "Longo Prazo até 2034"
+      "deadline": "Longo Prazo até 2034",
+      "actions": [
+        "elaboração do projeto executivo do sistema de distribuição, com as ampliações necessárias, com enfoque na implantação da setorização e equacionamento da macro e micromedição; ",
+        "redução da pressão nas canalizações, com instalação de válvulas redutoras de pressão com controladores inteligentes; ",
+        "troca de trechos de rede e substituição de ramais com vazamentos; ",
+        "estudos e instalação de macromedidores setoriais, para avaliação do consumo macromedido para confronto com o consumo micromedido, resultando um planej"
+      ]
     },
     {
       "objective": "Ampliação do índice de coleta de esgotos,",
-      "deadline": "Emergencial até 2015"
+      "deadline": "Emergencial até 2015",
+      "actions": [
+        "ampliação de redes de distribuição já implantadas ou criação de subredes"
+      ]
     },
     {
       "objective": "Ampliação do índice de tratamento de esgotos",
-      "deadline": "Curto prazo até 2018"
+      "deadline": "Curto prazo até 2018",
+      "actions": [
+        "projetos de esgotamento sanitário e implantação de redes coletoras e estações de tratamento de esgotos (ETEs)"
+      ]
     }
   ],
   "esgotamento-sanitario": [
     {
       "objective": "Ampliação do índice de coleta de esgotos.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "implantação de coleta e tratamento de esgotos em sistemas separadores absolutos,"
+      ]
     },
     {
       "objective": "Ampliação do índice de tratamento de esgotos.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "investimentos em obras de melhoria e ampliação do sistema de coleta e tratamento de esgotos, implantação de sistemas de reuso dire"
+      ]
     }
   ],
   "manejo-das-aguas-pluviais": [
     {
       "objective": "Controle de inundações",
-      "deadline": "Médio prazo"
+      "deadline": "Médio prazo",
+      "actions": [
+        "implantação de sistemas de bacias de detenção em áreas de maior risco, ampliação e revitalização"
+      ]
     }
   ],
   "manejo-de-residuos-solidos": [
     {
       "objective": "Ampliar o índice de coleta de resíduos sólidos domiciliares.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "ampliação do serviço de coleta seletiva domiciliar com a inclus"
+      ]
     },
     {
       "objective": "Ampliar o índice de coleta dos resíduos da construção civil.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "distribuição de equipamentos e recipientes segregados para os resíduos da"
+      ]
     },
     {
       "objective": "Manter o índice de coleta de resíduos de serviços de saúde.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "realizar a conscientização dos geradores de resíduos de serviços de saúde quanto à importância da segregação"
+      ]
     },
     {
       "objective": "Ampliar índice de reciclagem dos resíduos domiciliares.",
-      "deadline": "Longo prazo até 203"
+      "deadline": "Longo prazo até 203",
+      "actions": [
+        "implantar um programa de coleta seletiva"
+      ]
     },
     {
       "objective": "Ampliar índice de reaproveitamento dos resíduos da construção civil.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "implantar programa de gerenciamento dos resíduos da construção civil"
+      ]
     },
     {
       "objective": "Aumentar a nota da avaliação do IQR.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "implantar programa de educação ambiental para sensibilizar a população em relação à importância da correta segregação e destinação dos resídu"
+      ]
     },
     {
       "objective": "Disposição adequada dos resíduos sólidos domiciliares.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "implantar programa de educação ambiental para sensibil"
+      ]
     },
     {
       "objective": "Disposição adequada dos resíduos da construção civil.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "implementação de um programa de gerenciamento dos resíduos da construção civil"
+      ]
     },
     {
       "objective": "Tratamento e disposição adequada dos resíduos de serviços de saúde.",
-      "deadline": "Longo prazo até 2034"
+      "deadline": "Longo prazo até 2034",
+      "actions": [
+        "implantação de uma Central de Tratamento e Destinação Final dos resíduos de serviço de saúde"
+      ]
     },
     {
       "objective": "Universalização dos serviços de limpeza e varrição.",
-      "deadline": "2015"
+      "deadline": "2015",
+      "actions": [
+        "Realizar campanhas educativas e de incentivo à limpeza pública",
+        "Realizar a identificação fornec"
+      ]
     }
   ]
 }
