@@ -155,7 +155,7 @@ if __name__ == "__main__":
         plan = get_plan("objectives_and_deadlines")
         option = get_option("components_menu")
         if option == "1":
-            for index in enumerate(components):
+            for index, _ in enumerate(components):
                 generate_objectives(index, plan)
         else:
             index = int(option) - 2
@@ -164,7 +164,7 @@ if __name__ == "__main__":
         plan = get_plan("objectives_and_deadlines")
         option = get_option("components_menu")
         if option == "1":
-            for index in enumerate(components):
+            for index, _ in enumerate(components):
                 generate_deadlines_and_actions(index, plan, "deadline")
         else:
             index = int(option) - 2
@@ -173,7 +173,7 @@ if __name__ == "__main__":
         plan = get_plan("actions")
         option = get_option("components_menu")
         if option == "1":
-            for index in enumerate(components):
+            for index, _ in enumerate(components):
                 generate_deadlines_and_actions(index, plan, "actions")
         else:
             index = int(option) - 2
