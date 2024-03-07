@@ -5,7 +5,8 @@ disable=
       C0116, # missing-function-docstring
       W0703, # Catching to general exception Exception
       R0903, # too-few-public-methods
-			W0719, # broad-exception-raised
+      W0719, # broad-exception-raised
+      W0511, # fix-me
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
 # only in one or another interpreter, leading to false positives when analysed.
