@@ -99,7 +99,8 @@ def generate_tab_3_1(data_json, tab):
             tab.cell(row=index + aux + 2, column=1).value = component_upper
             tab.cell(row=index + aux + 2, column=2).value = number_of_objectives
             tab.cell(row=index + aux + 2, column=3).value = value["objective"]
-            tab.cell(row=index + aux + 2, column=4).value = value["deadline"]
+            if value.get("deadline"):
+                tab.cell(row=index + aux + 2, column=4).value = value["deadline"]
         merge_and_center(tab, aux + 2, aux + 1 + len(data_json[key]), 1)
         merge_and_center(tab, aux + 2, aux + 1 + len(data_json[key]), 2)
         aux += len(data_json[key])
@@ -113,6 +114,8 @@ def generate_tab_3_2(data_json, tab):
         len_actions = [0, 0, 0, 0, 0]
 
         for _, value in enumerate(data_json[key]):
+            if not value.get("actions"):
+                continue
             len_actions[0] += len(value["actions"])
             if "Imediato" in value["deadline"] or "Emergencial" in value["deadline"]:
                 len_actions[1] += len(value["actions"])
@@ -142,6 +145,8 @@ def generate_tab_3_3(data_json, tab):
         set_header_to_tab_3_3(tab, aux, key)
         aux += 4
         for i, value in enumerate(data_json[key]):
+            if not value.get("actions"):
+                continue
             actions = value["actions"]
             for j, data in enumerate(actions):
                 tab.cell(row=i + j + aux + 2, column=3).value = data
