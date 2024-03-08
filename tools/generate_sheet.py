@@ -17,7 +17,7 @@ components_keys = [
     "manejo-das-aguas-pluviais",
     "manejo-de-residuos-solidos",
 ]
-components_upper = [
+components_uppercase = [
     "ABASTECIMENTO DE ÁGUA",
     "ESGOTAMENTO SANITÁRIO",
     "MANEJO DAS ÁGUAS PLUVIAIS",
@@ -56,9 +56,9 @@ def set_border(tab, row, column):
 
 def set_header_to_tab_3_3(tab, aux, key):
 
-    component_upper = components_upper[components_keys.index(key)]
+    component_uppercase = components_uppercase[components_keys.index(key)]
 
-    tab.cell(row=aux + 3, column=1).value = "COMPONENTE: " + component_upper
+    tab.cell(row=aux + 3, column=1).value = "COMPONENTE: " + component_uppercase
     tab.cell(row=aux + 4, column=1).value = "OBJETIVO"
     tab.cell(row=aux + 4, column=2).value = "PROJETO"
     tab.cell(row=aux + 4, column=3).value = "DESCRIÇÃO DA AÇÃO PROPOSTA"
@@ -88,76 +88,115 @@ def set_header_to_tab_3_3(tab, aux, key):
         set_border(tab, aux + 5, i + 4)
 
 
+def get_actions_index(deadline):
+
+    if "Imediato" in deadline or "Emergencial" in deadline:
+        return 1
+    elif "Curto" in deadline:
+        return 2
+    elif "Médio" in deadline:
+        return 3
+    elif "Longo" in deadline:
+        return 4
+    else:
+        # TODO: Veriricar outras strings como Ano menor q o atual, etc...
+        print(
+            f"Prazo {orange(deadline)} não identificado, assumindo como {purple('Imediato')}"
+        )
+        return 1
+
+
 def generate_tab_3_1(data_json, tab):
 
     aux = 0
 
     for key in components_keys:
-        component_upper = components_upper[components_keys.index(key)]
-        for index, value in enumerate(data_json[key]):
-            number_of_objectives = len(data_json[key])
-            tab.cell(row=index + aux + 2, column=1).value = component_upper
-            tab.cell(row=index + aux + 2, column=2).value = number_of_objectives
-            tab.cell(row=index + aux + 2, column=3).value = value["objective"]
-            if value.get("deadline"):
-                tab.cell(row=index + aux + 2, column=4).value = value["deadline"]
-        merge_and_center(tab, aux + 2, aux + 1 + len(data_json[key]), 1)
-        merge_and_center(tab, aux + 2, aux + 1 + len(data_json[key]), 2)
+        component_uppercase = components_uppercase[components_keys.index(key)]
+        for i, value in enumerate(data_json[key]):
+
+            deadline = value.get("deadline")
+            objective = value.get("objective")
+            count_objectives = len(data_json[key])
+            start_row = aux + 2
+            end_row = aux + 1 + len(data_json[key])
+            row = i + start_row
+
+            tab.cell(row=row, column=1).value = component_uppercase
+            tab.cell(row=row, column=2).value = count_objectives
+            tab.cell(row=row, column=3).value = objective
+
+            if deadline:
+                tab.cell(row=row, column=4).value = deadline
+
+        merge_and_center(tab, start_row, end_row, 1)
+        merge_and_center(tab, start_row, end_row, 2)
         aux += len(data_json[key])
 
 
 def generate_tab_3_2(data_json, tab):
 
+    header_rows = 4  # rows on header plus 1
+
     for key in components_keys:
 
-        index = components_keys.index(key)
-        len_actions = [0, 0, 0, 0, 0]
+        row = components_keys.index(key) + header_rows
+        count_actions_splited = [0, 0, 0, 0, 0]
 
         for _, value in enumerate(data_json[key]):
-            if not value.get("actions"):
+
+            actions = value.get("actions")
+            deadline = value.get("deadline")
+
+            if not actions or not deadline:
                 continue
-            len_actions[0] += len(value["actions"])
-            if "Imediato" in value["deadline"] or "Emergencial" in value["deadline"]:
-                len_actions[1] += len(value["actions"])
-            elif "Curto" in value["deadline"]:
-                len_actions[2] += len(value["actions"])
-            elif "Médio" in value["deadline"]:
-                len_actions[3] += len(value["actions"])
-            elif "Longo" in value["deadline"]:
-                len_actions[4] += len(value["actions"])
-            else:
-                # TODO: Veriricar outras strings como Ano menor q o atual, etc...
-                print(
-                    f"Prazo {orange( value['deadline'])} não identificado, assumindo como {purple('Imediato')}"
-                )
-                len_actions[1] += len(value["actions"])
-        tab.cell(row=index + 4, column=2).value = len_actions[0]
-        tab.cell(row=index + 4, column=3).value = len_actions[1]
-        tab.cell(row=index + 4, column=5).value = len_actions[2]
-        tab.cell(row=index + 4, column=7).value = len_actions[3]
-        tab.cell(row=index + 4, column=9).value = len_actions[4]
+
+            index = get_actions_index(deadline)
+            count_actions_splited[0] += len(actions)
+            count_actions_splited[index] += len(actions)
+
+        tab.cell(row=row, column=2).value = count_actions_splited[0]
+        for i in range(4):
+            tab.cell(row=row, column=(i * 2) + 3).value = count_actions_splited[i + 1]
 
 
 def generate_tab_3_3(data_json, tab):
 
     aux = -2
+    header_rows = 4  # rows on header plus 1
+
     for key in components_keys:
+
         set_header_to_tab_3_3(tab, aux, key)
-        aux += 4
+        aux += header_rows
+
         for i, value in enumerate(data_json[key]):
-            if not value.get("actions"):
-                continue
+
             actions = value["actions"]
-            for j, data in enumerate(actions):
-                tab.cell(row=i + j + aux + 2, column=3).value = data
-                tab.cell(row=i + j + aux + 2, column=1).value = value["objective"]
-                set_border(tab, i + j + aux + 2, 1)
-                set_border(tab, i + j + aux + 2, 2)
-                set_border(tab, i + j + aux + 2, 3)
+
+            if not actions:
+                continue
+
+            start_row = aux + i + 2
+            end_row = aux + i + 1 + len(actions)
+
+            for j, action in enumerate(actions):
+
+                row = j + start_row
+                objective = value.get("objective")
+
+                tab.cell(row=row, column=1).value = objective
+                tab.cell(row=row, column=3).value = action
+
+                set_border(tab, row, 1)
+                set_border(tab, row, 2)
+                set_border(tab, row, 3)
+
                 for k in range(20):
-                    set_border(tab, i + j + aux + 2, k + 4)
-            merge_and_center(tab, aux + i + 2, aux + i + 1 + len(actions), 1)
+                    set_border(tab, row, header_rows + k)
+
+            merge_and_center(tab, start_row, end_row, 1)
             aux += len(actions) - 1
+
         aux += len(data_json[key])
 
 
