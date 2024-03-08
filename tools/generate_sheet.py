@@ -23,6 +23,12 @@ components_uppercase = [
     "MANEJO DAS ÁGUAS PLUVIAIS",
     "MANEJO DE RESÍDUOS SÓLIDOS",
 ]
+components_acronym = [
+    "AA",
+    "ES",
+    "AP",
+    "RS",
+]
 
 
 def merge_and_center(tab, start_row, end_row, start_column, end_column=None):
@@ -54,38 +60,66 @@ def set_border(tab, row, column):
     cell.border = border
 
 
-def set_header_to_tab_3_3(tab, aux, key):
+def set_header(tab, aux, key):
 
     component_uppercase = components_uppercase[components_keys.index(key)]
+    row = aux + 3
 
-    tab.cell(row=aux + 3, column=1).value = "COMPONENTE: " + component_uppercase
-    tab.cell(row=aux + 4, column=1).value = "OBJETIVO"
-    tab.cell(row=aux + 4, column=2).value = "PROJETO"
-    tab.cell(row=aux + 4, column=3).value = "DESCRIÇÃO DA AÇÃO PROPOSTA"
-    tab.cell(row=aux + 4, column=4).value = "HORIZONTE DO PMSB (anos)"
+    if tab.title == "Quadro3.3":
+        tab.cell(row=row + 1, column=1).value = "OBJETIVO"
+        tab.cell(row=row + 1, column=2).value = "PROJETO"
+        tab.cell(row=row + 1, column=3).value = "DESCRIÇÃO DA AÇÃO PROPOSTA"
+        tab.cell(row=row + 1, column=4).value = "HORIZONTE DO PMSB (anos)"
 
-    merge_and_center(tab, aux + 3, aux + 3, 1, 23)
-    merge_and_center(tab, aux + 4, aux + 5, 1)
-    merge_and_center(tab, aux + 4, aux + 5, 2)
-    merge_and_center(tab, aux + 4, aux + 5, 3)
-    merge_and_center(tab, aux + 4, aux + 4, 4, 23)
+    elif tab.title == "Quadro3.4":
+        tab.cell(row=row + 1, column=3).value = "META / PRAZO"
+        tab.cell(row=row + 1, column=4).value = "ANDAMENTO DA AÇÃO"
+        tab.cell(row=row + 1, column=24).value = "TIPO DE PROBLEMA"
+        tab.cell(row=row + 1, column=25).value = "MOTIVO"
+        tab.cell(row=row + 1, column=26).value = "JUSTIFICATIVA"
 
-    paint_cells(tab, "8EAADB", aux + 3, 1)
-    paint_cells(tab, "B4C6E7", aux + 4, 1)
-    paint_cells(tab, "B4C6E7", aux + 4, 2)
-    paint_cells(tab, "B4C6E7", aux + 4, 3)
-    paint_cells(tab, "B4C6E7", aux + 4, 4)
+        for i in range(3):
+            merge_and_center(tab, row + 1, row + 2, 24 + i)
 
-    set_border(tab, aux + 3, 1)
-    set_border(tab, aux + 4, 1)
-    set_border(tab, aux + 4, 2)
-    set_border(tab, aux + 4, 3)
-    set_border(tab, aux + 4, 4)
+    elif tab.title == "Quadro3.5":
+        tab.cell(row=row + 1, column=3).value = "TIPO DE PROBLEMA"
+        tab.cell(row=row + 1, column=4).value = "MOTIVO PROPOSTA DE ALTERNATIVA DE AÇÃO"
+        tab.cell(row=row + 1, column=5).value = "RESPONSÁVEL"
+        tab.cell(row=row + 1, column=6).value = "PARCERIAS"
+        tab.cell(row=row + 1, column=7).value = "IMPACTOS"
+        tab.cell(row=row + 2, column=7).value = "PRAZO"
+        tab.cell(row=row + 2, column=8).value = "CUSTO"
 
-    for i in range(20):
-        tab.cell(row=aux + 5, column=i + 4).value = i + 1
-        paint_cells(tab, "B4C6E7", aux + 5, i + 4)
-        set_border(tab, aux + 5, i + 4)
+        merge_and_center(tab, row + 1, row + 1, 7, 8)
+        for i in range(3):
+            merge_and_center(tab, row + 1, row + 2, i + 3)
+
+    columns = {"Quadro3.3": 23, "Quadro3.4": 26, "Quadro3.5": 8}
+    merge_and_center(tab, row, row, 1, columns[tab.title])
+    for i in range(columns[tab.title]):
+        set_border(tab, row, i + 1)
+        set_border(tab, row + 1, i + 1)
+        set_border(tab, row + 2, i + 1)
+        paint_cells(tab, "B4C6E7", row + 1, i + 1)
+        paint_cells(tab, "B4C6E7", row + 2, i + 1)
+
+    # Common to Tab3.3 and Tab3.4
+    if tab.title != "Quadro3.5":
+        merge_and_center(tab, row + 1, row + 1, 4, 23)
+        for i in range(20):
+            tab.cell(row=row + 2, column=i + 4).value = i + 1
+    tab.cell(row=row, column=1).value = "COMPONENTE: " + component_uppercase
+
+    # Common to Tab3.4 and Tab3.5
+    if tab.title != "Quadro3.3":
+        tab.cell(row=row + 1, column=1).value = "DESCRIÇÃO DA AÇÃO"
+        tab.cell(row=row + 1, column=2).value = "CLASSIFICAÇÃO DA AÇÃO"
+
+    # Common to all tabs
+    merge_and_center(tab, row + 1, row + 2, 1)
+    merge_and_center(tab, row + 1, row + 2, 2)
+    merge_and_center(tab, row + 1, row + 2, 3)
+    paint_cells(tab, "8EAADB", row, 1)
 
 
 def get_actions_index(deadline):
@@ -166,7 +200,7 @@ def generate_tab_3_3(data_json, tab):
 
     for key in components_keys:
 
-        set_header_to_tab_3_3(tab, aux, key)
+        set_header(tab, aux, key)
         aux += header_rows
 
         for i, value in enumerate(data_json[key]):
@@ -200,6 +234,60 @@ def generate_tab_3_3(data_json, tab):
         aux += len(data_json[key])
 
 
+def generate_tab_3_4_and_3_5(data_json, tab):
+
+    aux = -2
+    aux2 = 0
+    header_rows = 4  # rows on header plus 1
+
+    for key in components_keys:
+
+        set_header(tab, aux, key)
+        aux += header_rows
+
+        for i, value in enumerate(data_json[key]):
+
+            actions = value.get("actions")
+
+            if not actions:
+                continue
+
+            for j, data in enumerate(actions):
+
+                row = i + j + aux + 2
+                action_global_index = f"A{j + aux2 + 1}"
+                cmp_acronym = components_acronym[components_keys.index(key)]
+                objective_index = f"O{i + 1}"
+                action_index = f"a{j + 1}-{len(actions)}"
+
+                tab.cell(row=row, column=1).value = data
+                # TODO: Implement "Projeto" at "CLASSIFICAÇÃO DA AÇÃO", ex: /P1/
+                tab.cell(row=row, column=2).value = (
+                    f"{action_global_index}/{cmp_acronym}/{objective_index}/{action_index}"
+                )
+                if tab.title == "Quadro3.4":
+                    tab.cell(row=row, column=3).value = "Programado"
+                    tab.cell(row=row + 1, column=3).value = "Executado"
+
+                    merge_and_center(tab, row, row + 1, 1)
+                    merge_and_center(tab, row, row + 1, 2)
+                    merge_and_center(tab, row, row + 1, 24)
+                    merge_and_center(tab, row, row + 1, 25)
+                    merge_and_center(tab, row, row + 1, 26)
+
+                    for k in range(26):
+                        set_border(tab, row, k + 1)
+                        set_border(tab, row + 1, k + 1)
+                else:
+                    for k in range(8):
+                        set_border(tab, row, k + 1)
+
+                aux += 1 if tab.title == "Quadro3.4" else 0
+            aux2 += len(actions)
+            aux += len(actions) - 1
+        aux += len(data_json[key])
+
+
 if __name__ == "__main__":
 
     with open("data/funasa.json", encoding="utf-8") as file:
@@ -212,6 +300,8 @@ if __name__ == "__main__":
     generate_tab_3_1(funasa, workbook["Quadro3.1"])
     generate_tab_3_2(funasa, workbook["Quadro3.2"])
     generate_tab_3_3(funasa, workbook["Quadro3.3"])
+    generate_tab_3_4_and_3_5(funasa, workbook["Quadro3.4"])
+    generate_tab_3_4_and_3_5(funasa, workbook["Quadro3.5"])
 
     workbook.save("tmp/sheet.xlsx")
 
