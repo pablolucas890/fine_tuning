@@ -1,5 +1,8 @@
 import json
 import sys
+import os
+import subprocess
+import time
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Alignment, Border, Side
 
@@ -167,3 +170,16 @@ if __name__ == "__main__":
     generate_tab_3_3(funasa, workbook["Quadro3.3"])
 
     workbook.save("tmp/sheet.xlsx")
+
+    try:
+        # fecha o LibreOffice se já estiver aberto
+        subprocess.Popen(["pkill", "soffice"])
+        # sleep para dar tempo de fechar o LibreOffice
+        time.sleep(1)
+        with open(os.devnull, "w", encoding="utf-8") as devnull:
+            # TODO: Usar excel no lugar do libreoffice
+            subprocess.Popen(
+                ["libreoffice", "tmp/sheet.xlsx"], stdout=devnull, stderr=devnull
+            )
+    except Exception as e:
+        print("Erro ao abrir o LibreOffice:", e)

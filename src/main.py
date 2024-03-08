@@ -72,6 +72,7 @@ def write_funasa(funasa):
     with open("data/funasa.json", encoding="utf-8", mode="w") as f:
         funasa = json.dumps(funasa, ensure_ascii=False, indent=2).encode("utf8")
         f.write(funasa.decode())
+    print("\nDados salvos em " + orange("data/funasa.json"))
 
 
 def get_option(menu_type):
@@ -81,6 +82,8 @@ def get_option(menu_type):
         print(f"{orange('1')} - Identificar os objetivos do componente")
         print(f"{orange('2')} - Identificar o prazo de um objetivo específico")
         print(f"{orange('3')} - Identificar as ações de um objetivo específico")
+        print(f"{orange('4')} - Gerar planilha com quadros da FUNASA")
+        print(f"{orange('5')} - Sair")
         opt = input()
     elif menu_type == "components_menu":
         print("Digite a opção desejada: \n")
@@ -89,6 +92,7 @@ def get_option(menu_type):
         print(f"{orange('3')} - Apenas o componente de esgotamento sanitário")
         print(f"{orange('4')} - Apenas o componente de manejo das águas pluviais")
         print(f"{orange('5')} - Apenas o componente de manejo de resíduos sólidos")
+        print(f"{orange('6')} - Voltar")
         opt = input()
     os.system("clear")
     return opt
@@ -151,33 +155,37 @@ if __name__ == "__main__":
 
     option = get_option("main_menu")
 
-    if option == "1":
-        plan = get_plan("objectives_and_deadlines")
-        option = get_option("components_menu")
+    while option != "5":
         if option == "1":
-            for index, _ in enumerate(components):
+            plan = get_plan("objectives_and_deadlines")
+            option = get_option("components_menu")
+            if option == "1":
+                for index, _ in enumerate(components):
+                    generate_objectives(index, plan)
+            elif option != "6":
+                index = int(option) - 2
                 generate_objectives(index, plan)
-        else:
-            index = int(option) - 2
-            generate_objectives(index, plan)
-    elif option == "2":
-        plan = get_plan("objectives_and_deadlines")
-        option = get_option("components_menu")
-        if option == "1":
-            for index, _ in enumerate(components):
+            write_funasa(funasa)
+        elif option == "2":
+            plan = get_plan("objectives_and_deadlines")
+            option = get_option("components_menu")
+            if option == "1":
+                for index, _ in enumerate(components):
+                    generate_deadlines_and_actions(index, plan, "deadline")
+            elif option != "6":
+                index = int(option) - 2
                 generate_deadlines_and_actions(index, plan, "deadline")
-        else:
-            index = int(option) - 2
-            generate_deadlines_and_actions(index, plan, "deadline")
-    elif option == "3":
-        plan = get_plan("actions")
-        option = get_option("components_menu")
-        if option == "1":
-            for index, _ in enumerate(components):
+            write_funasa(funasa)
+        elif option == "3":
+            plan = get_plan("actions")
+            option = get_option("components_menu")
+            if option == "1":
+                for index, _ in enumerate(components):
+                    generate_deadlines_and_actions(index, plan, "actions")
+            elif option != "6":
+                index = int(option) - 2
                 generate_deadlines_and_actions(index, plan, "actions")
-        else:
-            index = int(option) - 2
-            generate_deadlines_and_actions(index, plan, "actions")
-
-    write_funasa(funasa)
-    print("\nDados salvos em " + orange("data/funasa.json"))
+            write_funasa(funasa)
+        elif option == "4":
+            os.system("python3 tools/generate_sheet.py")
+        option = get_option("main_menu")
