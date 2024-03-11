@@ -39,6 +39,10 @@ messages = []
 
 FINE_TUNED_MODEL = "ft:gpt-3.5-turbo-0613:personal:teste-pablo:8xFa0aLd"
 MAX_TOKENS_PER_EXAMPLE = 4096
+TOP_P = 0
+PRESENCE_PENALTY = 0
+FREQUENCY_PENALTY = 0
+TEMPERATURE = 0
 
 
 def get_completion_not_stream(client, messages):
@@ -49,7 +53,15 @@ def get_completion_not_stream(client, messages):
             if _tokens > MAX_TOKENS_PER_EXAMPLE:
                 messages.pop(2)
                 messages.pop(2)
-    chat = client.chat.completions.create(model=FINE_TUNED_MODEL, messages=messages)
+    chat = client.chat.completions.create(
+        model=FINE_TUNED_MODEL,
+        messages=messages,
+        stream=False,
+        PRESENCE_PENALTY=PRESENCE_PENALTY,
+        FREQUENCY_PENALTY=FREQUENCY_PENALTY,
+        max_tokens=MAX_TOKENS_PER_EXAMPLE,
+        TEMPERATURE=TEMPERATURE,
+    )
 
     for chunk in chat:
         if chunk[0] == "choices":
