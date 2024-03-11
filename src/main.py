@@ -129,7 +129,7 @@ def generate_objectives(index, plan):
             funasa[get_key(component)].append({"objective": res})
 
 
-def generate_deadlines_and_actions(index, plan, key):
+def generate_deadlines_and_actions(index, plan, key, year=None):
     print(
         f"Gerando {orange(key)} para os objetivos do componente de {orange(components[index])} ..."
     )
@@ -144,7 +144,7 @@ def generate_deadlines_and_actions(index, plan, key):
             ).split("\n")
         else:
             system, user, user_without_plan = get_system_user_from_deadline(
-                plan, objective["objective"], components[index]
+                plan, objective["objective"], components[index], year
             )
             objective[key] = get_assistant_message(system, user, user_without_plan)
 
@@ -169,12 +169,14 @@ if __name__ == "__main__":
         elif option == "2":
             plan = get_plan("objectives_and_deadlines")
             option = get_option("components_menu")
+            print("Digite o ano de publicação do plano: ")
+            year = input()
             if option == "1":
                 for index, _ in enumerate(components):
-                    generate_deadlines_and_actions(index, plan, "deadline")
+                    generate_deadlines_and_actions(index, plan, "deadline", year)
             elif option != "6":
                 index = int(option) - 2
-                generate_deadlines_and_actions(index, plan, "deadline")
+                generate_deadlines_and_actions(index, plan, "deadline", year)
             write_funasa(funasa)
         elif option == "3":
             plan = get_plan("actions")

@@ -133,7 +133,6 @@ def get_actions_index(deadline):
     elif "Longo" in deadline:
         return 4
     else:
-        # TODO: Veriricar outras strings como Ano menor q o atual, etc...
         print(
             f"Prazo {orange(deadline)} não identificado, assumindo como {purple('Imediato')}"
         )
