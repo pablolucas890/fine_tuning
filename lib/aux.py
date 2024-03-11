@@ -76,6 +76,32 @@ def get_system_user_from_deadline(plan, objective, component, year):
     return system, user, user_without_plan
 
 
+def get_system_user_from_investment(plan, objective, component):
+
+    system = (
+        "Você é um engenheiro ambiental com a tarefa de analisar um plano municipal de saneamento básico. "
+        "Sua missão é identificar o investimento previsto para a realização de um objetivo específico. "
+        "Os investimentos devem ser apresentados em reais e de forma clara e concisa, sem introduções, títulos,"
+        " descrições, explicações, ou comentários adicionais, isto é, apenas informe o valor no formato: R$ ###,##. "
+        "Se o investimento previsto para a realização do objetivo não estiver claro ou não for mencionado, indique isso"
+        " na sua resposta."
+    )
+
+    user = (
+        f"Encontre o investimento previsto para o objetivo específico '{objective}' do componente de '{component}'"
+        f" no seguinte trecho do plano municipal de saneamento básico: '{plan}'. "
+        "Indique apenas o valor previsto para a realização desse objetivo, sem incluir informações adicionais."
+    )
+
+    user_without_plan = (
+        f"Encontre o investimento previsto para o objetivo específico '{objective}' do componente de '{component}'"
+        f" no trecho do plano municipal de saneamento básico fornecido. "
+        "Indique apenas o valor previsto para a realização desse objetivo, sem incluir informações adicionais."
+    )
+
+    return system, user, user_without_plan
+
+
 def get_system_user_from_actions(plan, objective, component):
 
     system = (

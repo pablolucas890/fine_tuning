@@ -8,7 +8,8 @@
         "expansão da rede de distribuição de água;",
         "realização de campanhas de conscientização sobre a importância da água e o combate ao desperdício;",
         "implantação de sistema de captação de água de chuva para uso não potável."
-      ]
+      ],
+      "investment": "R$ 56.500.000,00"
     },
     {
       "objective": "Manutenção do índice de atendimento de Cobertura 100% Água,",
@@ -17,7 +18,8 @@
         "elaboração do projeto executivo do sistema de distribuição, com as ampliações necessárias, com enfoque na implantação da setorização e equacionamento da macro e micromedição;",
         "elaboração e disponibilização de um cadastro técnico do sistema de abastecimento de água, em meio digital, com atualização contínua;",
         "implantação de um sistema informatizado para controle operacional."
-      ]
+      ],
+      "investment": "Na situação atual (2013), o índice de cobertura de água é de 100%. O plano prevê a manutenção desse índice de atendimento. Portanto, não há um investimento específico previsto para esse objetivo."
     },
     {
       "objective": "Redução das perdas de água,",
@@ -27,21 +29,24 @@
         "redução da pressão nas canalizações, com instalação de válvulas redutoras de pressão com controladores inteligentes; ",
         "troca de trechos de rede e substituição de ramais com vazamentos; ",
         "estudos e instalação de macromedidores setoriais, para avaliação do consumo macromedido para confronto com o consumo micromedido, resultando um planej"
-      ]
+      ],
+      "investment": "R$ 315.000,00"
     },
     {
       "objective": "Ampliação do índice de coleta de esgotos,",
       "deadline": "Imediato até 3 anos",
       "actions": [
         "ampliação de redes de distribuição já implantadas ou criação de subredes"
-      ]
+      ],
+      "investment": "R$ 2.280.000,00"
     },
     {
       "objective": "Ampliação do índice de tratamento de esgotos",
       "deadline": "Longo Prazo até 20 anos",
       "actions": [
         "projetos de esgotamento sanitário e implantação de redes coletoras e estações de tratamento de esgotos (ETEs)"
-      ]
+      ],
+      "investment": "R$ 3.615.000,00"
     }
   ],
   "esgotamento-sanitario": [
@@ -50,14 +55,16 @@
       "deadline": "Imediato até 3 anos",
       "actions": [
         "implantação de coleta e tratamento de esgotos em sistemas separadores absolutos,"
-      ]
+      ],
+      "investment": "R$2.785.388,37"
     },
     {
       "objective": "Ampliação do índice de tratamento de esgotos.",
       "deadline": "Longo Prazo até 20 anos",
       "actions": [
         "investimentos em obras de melhoria e ampliação do sistema de coleta e tratamento de esgotos, implantação de sistemas de reuso dire"
-      ]
+      ],
+      "investment": "R$4.231.203,22"
     }
   ],
   "manejo-das-aguas-pluviais": [
@@ -66,7 +73,8 @@
       "deadline": "Médio prazo",
       "actions": [
         "implantação de sistemas de bacias de detenção em áreas de maior risco, ampliação e revitalização"
-      ]
+      ],
+      "investment": "Não mencionado."
     }
   ],
   "manejo-de-residuos-solidos": [
@@ -75,63 +83,72 @@
       "deadline": "Imediato até 3 anos",
       "actions": [
         "ampliação do serviço de coleta seletiva domiciliar com a inclus"
-      ]
+      ],
+      "investment": "R$957.442,56"
     },
     {
       "objective": "Ampliar o índice de coleta dos resíduos da construção civil.",
       "deadline": "Longo Prazo",
       "actions": [
         "distribuição de equipamentos e recipientes segregados para os resíduos da"
-      ]
+      ],
+      "investment": "R$147.000,00"
     },
     {
       "objective": "Manter o índice de coleta de resíduos de serviços de saúde.",
       "deadline": "Longo Prazo",
       "actions": [
         "realizar a conscientização dos geradores de resíduos de serviços de saúde quanto à importância da segregação"
-      ]
+      ],
+      "investment": "R$42."
     },
     {
       "objective": "Ampliar índice de reciclagem dos resíduos domiciliares.",
       "deadline": "Longo Prazo",
       "actions": [
         "implantar um programa de coleta seletiva"
-      ]
+      ],
+      "investment": "R$511.742,85"
     },
     {
       "objective": "Ampliar índice de reaproveitamento dos resíduos da construção civil.",
       "deadline": "Longo Prazo",
       "actions": [
         "implantar programa de gerenciamento dos resíduos da construção civil"
-      ]
+      ],
+      "investment": "R$616.000,00"
     },
     {
       "objective": "Aumentar a nota da avaliação do IQR.",
       "deadline": "Longo Prazo",
       "actions": [
         "implantar programa de educação ambiental para sensibilizar a população em relação à importância da correta segregação e destinação dos resídu"
-      ]
+      ],
+      "investment": "R$500."
     },
     {
       "objective": "Disposição adequada dos resíduos sólidos domiciliares.",
       "deadline": "Longo Prazo",
       "actions": [
         "implantar programa de educação ambiental para sensibil"
-      ]
+      ],
+      "investment": "R$101.363,64"
     },
     {
       "objective": "Disposição adequada dos resíduos da construção civil.",
       "deadline": "Longo Prazo",
       "actions": [
         "implementação de um programa de gerenciamento dos resíduos da construção civil"
-      ]
+      ],
+      "investment": "R$741.000,00"
     },
     {
       "objective": "Tratamento e disposição adequada dos resíduos de serviços de saúde.",
       "deadline": "Longo Prazo",
       "actions": [
         "implantação de uma Central de Tratamento e Destinação Final dos resíduos de serviço de saúde"
-      ]
+      ],
+      "investment": "R$172.000,00"
     },
     {
       "objective": "Universalização dos serviços de limpeza e varrição.",
@@ -139,7 +156,8 @@
       "actions": [
         "Realizar campanhas educativas e de incentivo à limpeza pública",
         "Realizar a identificação fornec"
-      ]
+      ],
+      "investment": "R$226.149,32"
     }
   ]
 }

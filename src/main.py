@@ -13,6 +13,7 @@ from lib.aux import (
     get_system_user_from_objectives,
     get_system_user_from_deadline,
     get_system_user_from_actions,
+    get_system_user_from_investment,
 )
 
 with open("cfg.json", encoding="utf-8") as f:
@@ -81,9 +82,10 @@ def get_option(menu_type):
         print("Digite a opção desejada: \n")
         print(f"{orange('1')} - Identificar os objetivos do componente")
         print(f"{orange('2')} - Identificar o prazo de um objetivo específico")
-        print(f"{orange('3')} - Identificar as ações de um objetivo específico")
-        print(f"{orange('4')} - Gerar planilha com quadros da FUNASA")
-        print(f"{orange('5')} - Sair")
+        print(f"{orange('3')} - Identificar o investimento de um objetivo específico")
+        print(f"{orange('4')} - Identificar as ações de um objetivo específico")
+        print(f"{orange('5')} - Gerar planilha com quadros da FUNASA")
+        print(f"{orange('6')} - Sair")
         opt = input()
     elif menu_type == "components_menu":
         print("Digite a opção desejada: \n")
@@ -129,7 +131,7 @@ def generate_objectives(index, plan):
             funasa[get_key(component)].append({"objective": res})
 
 
-def generate_deadlines_and_actions(index, plan, key, year=None):
+def generate_inv_ddl_act(index, plan, key, year=None):
     print(
         f"Gerando {orange(key)} para os objetivos do componente de {orange(components[index])} ..."
     )
@@ -142,9 +144,14 @@ def generate_deadlines_and_actions(index, plan, key, year=None):
             objective[key] = get_assistant_message(
                 system, user, user_without_plan
             ).split("\n")
-        else:
+        elif key == "deadline":
             system, user, user_without_plan = get_system_user_from_deadline(
                 plan, objective["objective"], components[index], year
+            )
+            objective[key] = get_assistant_message(system, user, user_without_plan)
+        else:
+            system, user, user_without_plan = get_system_user_from_investment(
+                plan, objective["objective"], components[index]
             )
             objective[key] = get_assistant_message(system, user, user_without_plan)
 
@@ -155,9 +162,9 @@ if __name__ == "__main__":
 
     option = get_option("main_menu")
 
-    while option != "5":
+    while option != "6":
         if option == "1":
-            plan = get_plan("objectives_and_deadlines")
+            plan = get_plan("obj_ddl_inv")
             option = get_option("components_menu")
             if option == "1":
                 for index, _ in enumerate(components):
@@ -167,27 +174,38 @@ if __name__ == "__main__":
                 generate_objectives(index, plan)
             write_funasa(funasa)
         elif option == "2":
-            plan = get_plan("objectives_and_deadlines")
+            plan = get_plan("obj_ddl_inv")
             option = get_option("components_menu")
             print("Digite o ano de publicação do plano: ")
             year = input()
             if option == "1":
                 for index, _ in enumerate(components):
-                    generate_deadlines_and_actions(index, plan, "deadline", year)
+                    generate_inv_ddl_act(index, plan, "deadline", year)
             elif option != "6":
                 index = int(option) - 2
-                generate_deadlines_and_actions(index, plan, "deadline", year)
+                generate_inv_ddl_act(index, plan, "deadline", year)
             write_funasa(funasa)
         elif option == "3":
+            plan = get_plan("obj_ddl_inv")
+            option = get_option("components_menu")
+            if option == "1":
+                for index, _ in enumerate(components):
+                    generate_inv_ddl_act(index, plan, "investment")
+            elif option != "6":
+                index = int(option) - 2
+                generate_inv_ddl_act(index, plan, "investment")
+            write_funasa(funasa)
+
+        elif option == "4":
             plan = get_plan("actions")
             option = get_option("components_menu")
             if option == "1":
                 for index, _ in enumerate(components):
-                    generate_deadlines_and_actions(index, plan, "actions")
+                    generate_inv_ddl_act(index, plan, "actions")
             elif option != "6":
                 index = int(option) - 2
-                generate_deadlines_and_actions(index, plan, "actions")
+                generate_inv_ddl_act(index, plan, "actions")
             write_funasa(funasa)
-        elif option == "4":
+        elif option == "5":
             os.system("python3 tools/generate_sheet.py")
         option = get_option("main_menu")

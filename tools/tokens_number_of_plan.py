@@ -17,11 +17,11 @@ if __name__ == "__main__":
 
     with open("data/plan_actions.txt", encoding="utf-8") as f:
         plan_actions = f.read()
-    with open("data/plan_objectives_and_deadlines.txt", encoding="utf-8") as f:
-        plan_objectives_and_deadlines = f.read()
+    with open("data/plan_obj_ddl_inv.txt", encoding="utf-8") as f:
+        plan_obj_ddl_inv = f.read()
 
     system, user_1, _ = get_system_user_from_objectives(plan_actions, "")
-    _, user_2, _ = get_system_user_from_objectives(plan_objectives_and_deadlines, "")
+    _, user_2, _ = get_system_user_from_objectives(plan_obj_ddl_inv, "")
 
     messages_1 = []
     messages_1.append({"role": "system", "content": system})
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     tokens_2 = num_tokens_from_messages(messages_2)
 
     print(f"Number of tokens in plan_actions: {orange(str(tokens_1))}")
-    print(f"Number of tokens in plan_objectives_and_deadlines: {orange(str(tokens_2))}")
+    print(f"Number of tokens in plan_obj_ddl_inv: {orange(str(tokens_2))}")
 
     if tokens_1 > MAX_TOKENS_PER_EXAMPLE:
         print(
@@ -44,6 +44,6 @@ if __name__ == "__main__":
         )
     if tokens_2 > MAX_TOKENS_PER_EXAMPLE:
         print(
-            f"\n{purple('Warning')}: the plan_objectives_and_deadlines has {purple(str(tokens_2))} tokens, which is "
+            f"\n{purple('Warning')}: the plan_obj_ddl_inv has {purple(str(tokens_2))} tokens, which is "
             + f" over the {orange(str(MAX_TOKENS_PER_EXAMPLE))} token limit"
         )

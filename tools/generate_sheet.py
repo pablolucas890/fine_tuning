@@ -3,6 +3,7 @@ import sys
 import os
 import subprocess
 import time
+import re
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Alignment, Border, Side
 
@@ -122,6 +123,37 @@ def set_header(tab, aux, key):
     paint_cells(tab, "8EAADB", row, 1)
 
 
+def convert_investment(investment):
+    if not "mil" in investment:
+        try:
+            return float(
+                investment.replace("R$", "")
+                .replace(" ", "")
+                .replace(".", "")
+                .replace(",", ".")
+            )
+        except ValueError:
+            return None
+    else:
+        pattern = r"(?:(?:R\$\s*)?(\d[\d\.,]*)\s*(mil(?:hões?|ha)?)|(\d+(?:\.\d+)?))"
+        match = re.match(pattern, investment, re.IGNORECASE)
+
+        if match:
+            number_str = match.group(1) or match.group(3)
+
+            if number_str:
+                number_str = number_str.replace(",", ".")
+
+                if "milh" in investment.lower():
+                    return float(number_str) * 1_000_000
+                elif "mil" in investment.lower():
+                    return float(number_str) * 1_000
+                else:
+                    return float(number_str)
+
+        return None
+
+
 def get_actions_index(deadline):
 
     if "Imediato" in deadline or "Emergencial" in deadline:
@@ -149,6 +181,7 @@ def generate_tab_3_1(data_json, tab):
 
             deadline = value.get("deadline")
             objective = value.get("objective")
+            investment = convert_investment(value.get("investment"))
             count_objectives = len(data_json[key])
             start_row = aux + 2
             end_row = aux + 1 + len(data_json[key])
@@ -160,6 +193,8 @@ def generate_tab_3_1(data_json, tab):
 
             if deadline:
                 tab.cell(row=row, column=4).value = deadline
+            if investment:
+                tab.cell(row=row, column=5).value = investment
 
         merge_and_center(tab, start_row, end_row, 1)
         merge_and_center(tab, start_row, end_row, 2)
@@ -174,22 +209,27 @@ def generate_tab_3_2(data_json, tab):
 
         row = components_keys.index(key) + header_rows
         count_actions_splited = [0, 0, 0, 0, 0]
+        count_investiment_splited = [0, 0, 0, 0, 0]
 
         for _, value in enumerate(data_json[key]):
 
             actions = value.get("actions")
             deadline = value.get("deadline")
-
+            investment = convert_investment(value.get("investment"))
             if not actions or not deadline:
                 continue
 
             index = get_actions_index(deadline)
             count_actions_splited[0] += len(actions)
             count_actions_splited[index] += len(actions)
+            count_investiment_splited[index] += investment if investment else 0
 
         tab.cell(row=row, column=2).value = count_actions_splited[0]
         for i in range(4):
             tab.cell(row=row, column=(i * 2) + 3).value = count_actions_splited[i + 1]
+            tab.cell(row=row, column=(i * 2) + 4).value = count_investiment_splited[
+                i + 1
+            ]
 
 
 def generate_tab_3_3(data_json, tab):
