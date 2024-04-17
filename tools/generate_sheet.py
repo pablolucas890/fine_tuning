@@ -124,6 +124,8 @@ def set_header(tab, aux, key):
 
 
 def convert_investment(investment):
+    if not investment:
+        return None
     if not "mil" in investment:
         try:
             return float(
@@ -244,7 +246,7 @@ def generate_tab_3_3(data_json, tab):
 
         for i, value in enumerate(data_json[key]):
 
-            actions = value["actions"]
+            actions = value.get("actions")
 
             if not actions:
                 continue

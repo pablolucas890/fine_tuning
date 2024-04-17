@@ -57,10 +57,9 @@ def get_completion_not_stream(client, messages):
         model=FINE_TUNED_MODEL,
         messages=messages,
         stream=False,
-        PRESENCE_PENALTY=PRESENCE_PENALTY,
-        FREQUENCY_PENALTY=FREQUENCY_PENALTY,
-        max_tokens=MAX_TOKENS_PER_EXAMPLE,
-        TEMPERATURE=TEMPERATURE,
+        presence_penalty=PRESENCE_PENALTY,
+        frequency_penalty=FREQUENCY_PENALTY,
+        temperature=TEMPERATURE,
     )
 
     for chunk in chat:
