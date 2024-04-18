@@ -16,7 +16,7 @@ if __name__ == "__main__":
     with open("cfg.json", encoding="utf-8") as f:
         suffix = json.load(f)["suffix"]
     with open("cfg.json", encoding="utf-8") as f:
-        model = json.load(f)["model"]
+        base_model_to_fine_tune = json.load(f)["base_model_to_fine_tune"]
     with open("data/data_training.jsonl", "r", encoding="utf-8") as f:
         data = [json.loads(line) for line in f]
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     response_training = client.files.create(file=data, purpose="fine-tune")
     id_training = response_training.id
     fine_tuning = client.fine_tuning.jobs.create(
-        training_file=id_training, model=model, suffix=suffix
+        training_file=id_training, model=base_model_to_fine_tune, suffix=suffix
     )
     print(purple("Modelo criado: ") + "\n")
     print(fine_tuning)

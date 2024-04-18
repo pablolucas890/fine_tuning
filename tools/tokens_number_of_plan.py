@@ -1,4 +1,5 @@
 import sys
+import json
 import tiktoken
 
 sys.path.append("/".join(__file__.split("/")[0:-2]))
@@ -11,7 +12,6 @@ from lib.aux import (
 )
 
 encoding = tiktoken.get_encoding("cl100k_base")
-MAX_TOKENS_PER_EXAMPLE = 4096
 
 if __name__ == "__main__":
 
@@ -19,6 +19,8 @@ if __name__ == "__main__":
         plan_actions = f.read()
     with open("data/plan_obj_ddl_inv.txt", encoding="utf-8") as f:
         plan_obj_ddl_inv = f.read()
+    with open("cfg.json", encoding="utf-8") as f:
+        tokens_limit = json.load(f)["tokens_limit"]
 
     system, user_1, _ = get_system_user_from_objectives(plan_actions, "")
     _, user_2, _ = get_system_user_from_objectives(plan_obj_ddl_inv, "")
@@ -37,13 +39,13 @@ if __name__ == "__main__":
     print(f"Number of tokens in plan_actions: {orange(str(tokens_1))}")
     print(f"Number of tokens in plan_obj_ddl_inv: {orange(str(tokens_2))}")
 
-    if tokens_1 > MAX_TOKENS_PER_EXAMPLE:
+    if tokens_1 > tokens_limit:
         print(
             f"\n{purple('Warning')}: the plan_actions has {purple(str(tokens_1))} tokens, which is over the"
-            + f" {purple(str(MAX_TOKENS_PER_EXAMPLE))} token limit"
+            + f" {purple(str(tokens_limit))} token limit"
         )
-    if tokens_2 > MAX_TOKENS_PER_EXAMPLE:
+    if tokens_2 > tokens_limit:
         print(
             f"\n{purple('Warning')}: the plan_obj_ddl_inv has {purple(str(tokens_2))} tokens, which is "
-            + f" over the {orange(str(MAX_TOKENS_PER_EXAMPLE))} token limit"
+            + f" over the {orange(str(tokens_limit))} token limit"
         )

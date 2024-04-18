@@ -8,14 +8,16 @@ sys.path.append("/".join(__file__.split("/")[0:-2]))
 # pylint: disable-next=wrong-import-position
 from lib.aux import purple, orange, num_tokens_from_messages
 
+with open("cfg.json", encoding="utf-8") as f:
+    tokens_limit = json.load(f)["tokens_limit"]
 
 encoding = tiktoken.get_encoding("cl100k_base")
 
 
 def data_loading(path):
     data_path = path
-    with open(data_path, "r", encoding="utf-8") as f:
-        data = [json.loads(line) for line in f]
+    with open(data_path, "r", encoding="utf-8") as file:
+        data = [json.loads(line) for line in file]
     return data
 
 
@@ -112,15 +114,14 @@ def count_tokens_and_more_informations(data):
     print_distribution(n_messages, "num_messages_per_example")
     print_distribution(convo_lens_array, "num_total_tokens_per_example")
     print_distribution(assistant_message_lens, "num_assistant_tokens_per_example")
-    n_too_long = sum(l > 4096 for l in convo_lens_array)
+    n_too_long = sum(l > tokens_limit for l in convo_lens_array)
     print(
-        f"\n{n_too_long} examples may be over the 4096 token limit, they will be truncated during fine-tuning"
+        f"\n{n_too_long} examples may be over the {tokens_limit} token limit, they will be truncated during fine-tuning"
     )
     return convo_lens_array
 
 
 def cost_estimate(data, convo_lens_array):
-    max_tokens_per_example = 4096
     target_epochs = 3
     min_target_examples = 100
     max_target_examples = 25000
@@ -133,7 +134,7 @@ def cost_estimate(data, convo_lens_array):
     elif n_train_examples * target_epochs > max_target_examples:
         n_epochs = max(min_default_epochs, max_target_examples // n_train_examples)
     n_billing_tokens_in_data = sum(
-        min(max_tokens_per_example, length) for length in convo_lens_array
+        min(tokens_limit, length) for length in convo_lens_array
     )
     print(
         f"Dataset has ~{n_billing_tokens_in_data} tokens that will be charged for during training"

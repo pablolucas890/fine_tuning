@@ -6,13 +6,15 @@ Este repositório contém todos os códigos para a criação do Fine Tuning de m
 - Install `python3-openpyxl`
   - sudo ap install `python3-openpyxl`
 - Create cfg file at `~/` with:
-  ```
+  ```js
   {
     "org" : "org",
     "key" : "key",
-    "suffix" :  "teste_pablo",
-    "model": "gpt-3.5-turbo-0613"
-    "excel_file_path": "data/pmsb_funasa_model.xlsx"
+    "suffix" :  "suffix",
+    "base_model_to_fine_tune": "gpt-3.5-turbo-0613",
+    "model_to_conversation": "ft:gpt-3.5-turbo-0613:personal:teste-pablo:8xFa0aLd",
+    "excel_file_path": "data/pmsb_funasa_model.xlsx",
+    "tokens_limit": 4096
   }
   ```
 - Install python packages
@@ -31,4 +33,8 @@ Este repositório contém todos os códigos para a criação do Fine Tuning de m
 ### To predictive actions
 ```json
 {"messages": [{"role": "system", "content": "Quando for solicitado para identificar as ações a serem realizadas a partir de um objetivo de um determinado componente, procure no texto partes que falem sobre ações e que de alguma forma estejam relacionadas ao objetivo que lhe for entregue"}, {"role": "user", "content": "Você é um engenheiro ambiental e precisa encontrar as acções a serem realizadas no objetivo de (___objetivo___) do componente de ___componente___ no plano antigo de ___cidade___ desenvolvido em ___ano___, trecho do plano que contém esta informação: (___trecho___) "}, {"role": "assistant", "content": "___acoes___"}]}
+```
+### To predictive investiments
+```json
+{"messages": [{"role": "system", "content": "Quando for solicitado para identificar o investimento previsto para realização de um objetivo de um determinado componente, procure no texto partes que falem sobre investimento, isto é, valores em milhares ou milhões de reais referentes a quantidade que deve ser gasto"}, {"role": "user", "content": "Você é um engenheiro ambiental e precisa encontrar o prazo para cumprimento do objetivo de (___objetivo___) do componente de ___componente___ no plano antigo de ___cidade___ desenvolvido em ___ano___, trecho do plano que contém esta informação: (___trecho___) "}, {"role": "assistant", "content": "___investimento___"}]}
 ```

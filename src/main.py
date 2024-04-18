@@ -20,6 +20,10 @@ with open("cfg.json", encoding="utf-8") as f:
     key = json.load(f)["key"]
 with open("cfg.json", encoding="utf-8") as f:
     org = json.load(f)["org"]
+with open("cfg.json", encoding="utf-8") as f:
+    tokens_limit = json.load(f)["tokens_limit"]
+with open("cfg.json", encoding="utf-8") as f:
+    model_to_conversation = json.load(f)["model_to_conversation"]
 
 client = OpenAI(api_key=key, organization=org)
 
@@ -37,8 +41,6 @@ funasa = {
 }
 messages = []
 
-FINE_TUNED_MODEL = "ft:gpt-3.5-turbo-0613:personal:teste-pablo:8xFa0aLd"
-MAX_TOKENS_PER_EXAMPLE = 4096
 TOP_P = 0
 PRESENCE_PENALTY = 0
 FREQUENCY_PENALTY = 0
@@ -47,14 +49,14 @@ TEMPERATURE = 0
 
 def get_completion_not_stream(client, messages):
     old_tokens = num_tokens_from_messages(messages)
-    if old_tokens > MAX_TOKENS_PER_EXAMPLE:
+    if old_tokens > tokens_limit:
         for _ in enumerate(messages):
             _tokens = num_tokens_from_messages(messages)
-            if _tokens > MAX_TOKENS_PER_EXAMPLE:
+            if _tokens > tokens_limit:
                 messages.pop(2)
                 messages.pop(2)
     chat = client.chat.completions.create(
-        model=FINE_TUNED_MODEL,
+        model=model_to_conversation,
         messages=messages,
         stream=False,
         presence_penalty=PRESENCE_PENALTY,
@@ -113,7 +115,13 @@ def get_option(menu_type):
 
 def get_plan(plan):
     with open(f"data/plan_{plan}.txt", encoding="utf-8") as f:
-        return f.read()
+        plan = f.read()
+        system_token, user_token, _ = get_system_user_from_objectives(plan, "")
+        messages_token = []
+        messages_token.append({"role": "system", "content": system_token})
+        messages_token.append({"role": "user", "content": user_token})
+        plan = plan[: (tokens_limit * 3) - 500]
+        return plan
 
 
 def get_funasa():
