@@ -82,11 +82,13 @@ def get_assistant_message(system, user, user_without_plan):
     return assistent_response
 
 
-def write_funasa(funasa):
+def write_funasa_and_open_sheet(funasa):
     with open("data/funasa.json", encoding="utf-8", mode="w") as f:
         funasa = json.dumps(funasa, ensure_ascii=False, indent=2).encode("utf8")
         f.write(funasa.decode())
     print("\nDados salvos em " + orange("data/funasa.json"))
+    print("Abrindo planilha...")
+    os.system("python3 tools/generate_sheet.py")
 
 
 def get_option(menu_type):
@@ -98,7 +100,8 @@ def get_option(menu_type):
         print(f"{orange('3')} - Identificar o investimento de um objetivo específico")
         print(f"{orange('4')} - Identificar as ações de um objetivo específico")
         print(f"{orange('5')} - Gerar planilha com quadros da FUNASA")
-        print(f"{orange('6')} - Sair")
+        print(f"{orange('6')} - Atualizar planilha com dados editados")
+        print(f"{orange('7')} - Sair")
         opt = input()
     elif menu_type == "components_menu":
         print("Digite a opção desejada: \n")
@@ -177,54 +180,76 @@ def generate_inv_ddl_act(index, plan, key, year=None):
 
 if __name__ == "__main__":
 
+    params = sys.argv
+    OPTION1 = None
+    OPTION2 = None
+    YEAR = None
+
+    if len(params) > 1:
+        OPTION1 = params[1]
+    if len(params) > 2:
+        OPTION2 = params[2]
+    if len(params) > 3:
+        YEAR = params[3]
+    if len(params) > 4:
+        model_to_conversation = params[4]
+    if len(params) > 5:
+        tokens_limit = int(params[5])
+
     funasa = get_funasa()
 
-    option = get_option("main_menu")
+    option = OPTION1 if OPTION1 else get_option("main_menu")
 
-    while option != "6":
+    while option != "7":
         if option == "1":
             plan = get_plan("obj_ddl_inv")
-            option = get_option("components_menu")
+            option = OPTION2 if OPTION2 else get_option("components_menu")
             if option == "1":
                 for index, _ in enumerate(components):
                     generate_objectives(index, plan)
-            elif option != "6":
+            elif option != "7":
                 index = int(option) - 2
                 generate_objectives(index, plan)
-            write_funasa(funasa)
+            write_funasa_and_open_sheet(funasa)
         elif option == "2":
             plan = get_plan("obj_ddl_inv")
-            option = get_option("components_menu")
-            print("Digite o ano de publicação do plano: ")
-            year = input()
+            option = OPTION2 if OPTION2 else get_option("components_menu")
+            if YEAR:
+                year = YEAR
+            else:
+                print("Digite o ano de publicação do plano: ")
+                year = input()
             if option == "1":
                 for index, _ in enumerate(components):
                     generate_inv_ddl_act(index, plan, "deadline", year)
-            elif option != "6":
+            elif option != "7":
                 index = int(option) - 2
                 generate_inv_ddl_act(index, plan, "deadline", year)
-            write_funasa(funasa)
+            write_funasa_and_open_sheet(funasa)
         elif option == "3":
             plan = get_plan("obj_ddl_inv")
-            option = get_option("components_menu")
+            option = OPTION2 if OPTION2 else get_option("components_menu")
             if option == "1":
                 for index, _ in enumerate(components):
                     generate_inv_ddl_act(index, plan, "investment")
-            elif option != "6":
+            elif option != "7":
                 index = int(option) - 2
                 generate_inv_ddl_act(index, plan, "investment")
-            write_funasa(funasa)
+            write_funasa_and_open_sheet(funasa)
 
         elif option == "4":
             plan = get_plan("actions")
-            option = get_option("components_menu")
+            option = OPTION2 if OPTION2 else get_option("components_menu")
             if option == "1":
                 for index, _ in enumerate(components):
                     generate_inv_ddl_act(index, plan, "actions")
-            elif option != "6":
+            elif option != "7":
                 index = int(option) - 2
                 generate_inv_ddl_act(index, plan, "actions")
-            write_funasa(funasa)
+            write_funasa_and_open_sheet(funasa)
         elif option == "5":
+            print("Abrindo planilha...")
             os.system("python3 tools/generate_sheet.py")
-        option = get_option("main_menu")
+        elif option == "6":
+            print("TODO: Atualizar funasa.json")
+        option = "7" if OPTION1 else get_option("main_menu")
